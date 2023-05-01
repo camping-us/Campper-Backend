@@ -1,0 +1,27 @@
+server:
+  servlet:
+    context-path: /api
+
+spring:
+  # .env import
+  config:
+    import: optional:file:.env[.properties]
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_NAME}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+  profiles:
+    active: prod
+#  redis:
+#    host: ${REDIS_HOST}
+#    port: ${REDIS_PORT}
+
+  springfox:
+    documentation:
+      swagger:
+        use-model-v3: false
+
+logging.level:
+  org.hibernate.SQL: debug
+  org.hibernate.type: trace
