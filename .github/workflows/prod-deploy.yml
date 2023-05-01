@@ -5,7 +5,7 @@
 # This workflow will build a Java project with Gradle and cache/restore any dependencies to improve the workflow execution time
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
 
-name: Push Image to DockerHub ver Dev
+name: Push Image to DockerHub ver Prod
 
 on:
   push:
@@ -86,3 +86,8 @@ jobs:
           push: true
           tags: ${{ steps.docker_meta.outputs.tags }}
           labels: ${{ steps.docker_meta.outputs.labels }}
+          
+      #workflow_dispatch
+      - run: gh api /repos/camping-us/Campper-Deploy/dispatches -f event_type='backend_event'
+        env:
+          GITHUB_TOKEN: ${{ secrets.DISPATCH_KEY }}
