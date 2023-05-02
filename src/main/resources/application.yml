@@ -25,3 +25,8 @@ spring:
 logging.level:
   org.hibernate.SQL: debug
   org.hibernate.type: trace
+
+# mapper setting
+mybatis:
+  type-aliases-package: com.campper.domain.*
+  mapper-locations: mapper/*.xml
