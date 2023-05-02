@@ -12,14 +12,13 @@ public enum Role {
 
     private String viewName;
 
-    @JsonCreator
-    public static Role fromDto (String viewName){
-        for(Role role: Role.values()){
-            if(role.getViewName().equals(viewName)){
-                return role;
-            }
-        }
-        return null;
-    }
-
+//    @JsonCreator
+//    public static Role fromDto (String viewName){
+//        for(Role role: Role.values()){
+//            if(role.getViewName().equals(viewName)){
+//                return role;
+//            }
+//        }
+//        return null;
+//    }
 }
