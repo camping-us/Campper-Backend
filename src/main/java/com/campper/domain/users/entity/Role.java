@@ -1,14 +1,13 @@
 package com.campper.domain.users.entity;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
 public enum Role {
-    ROLE_USER("사용자"),
-    ROLE_ADMIN("관리자");
+    USER("ROLE_USER"),
+    ADMIN("ROLE_ADMIN");
 
     private String viewName;
 

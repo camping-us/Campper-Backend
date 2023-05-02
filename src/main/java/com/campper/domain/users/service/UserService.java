@@ -5,6 +5,7 @@ import com.campper.domain.users.dto.request.PostUserDto;
 import com.campper.domain.users.dto.request.PutUserProfileDto;
 import com.campper.domain.users.dto.request.PutUserPwdDto;
 import com.campper.domain.users.dto.response.GetUserProfileDto;
+import com.campper.domain.users.entity.User;
 
 public interface UserService {
 
@@ -12,11 +13,11 @@ public interface UserService {
 
     void join(PostUserDto postUserDto);
 
-    void updatePwd(PutUserPwdDto putUserPwdDto, String authKey);
+    void updatePwd(PutUserPwdDto putUserPwdDto, User user);
 
-    GetUserProfileDto updateProfile(PutUserProfileDto putUserProfileDto, String authKey);
+    GetUserProfileDto updateProfile(PutUserProfileDto putUserProfileDto, User user);
 
-    GetUserProfileDto getUserProfile(String authKey);
+    GetUserProfileDto getUserProfile(User user);
 
-    void withdraw(DelUserDto delUserDto, String authKey);
+    void withdraw(DelUserDto delUserDto, User user);
 }
