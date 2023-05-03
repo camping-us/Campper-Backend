@@ -35,6 +35,6 @@
     </update>
 
     <delete id="delete">
-        
+
     </delete>
 </mapper>

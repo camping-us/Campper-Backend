@@ -1,13 +1,10 @@
 package com.campper.domain.boards.dto.request;
 
 import com.campper.domain.boards.entity.Category;
-import com.campper.domain.boards.entity.Image;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
