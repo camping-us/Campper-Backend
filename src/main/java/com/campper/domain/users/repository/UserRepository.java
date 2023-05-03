@@ -12,7 +12,7 @@ public interface UserRepository {
     boolean existByAuthKey(String authKey);
     Optional<User> findByAuthKey(String authKey);
     void save(User user);
-    User updatePwd(User user);
-    User updateProfile(User user);
+    void updatePwd(User user);
+    void updateProfile(User user);
     void delete(User user);
 }

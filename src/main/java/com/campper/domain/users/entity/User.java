@@ -20,7 +20,8 @@ public class User extends BaseEntity {
     private Role role;
 
     @Builder
-    public User(String authKey, String email, String pwd, LocalDate birth, String nickName, String profileImg, Role role) {
+    public User(Long id, String authKey, String email, String pwd, LocalDate birth, String nickName, String profileImg, Role role) {
+        this.id = id;
         this.authKey = authKey;
         this.email = email;
         this.pwd = pwd;

@@ -10,10 +10,12 @@ import com.campper.domain.users.repository.UserRepository;
 import com.campper.global.common.error.ErrorCode;
 import com.campper.global.common.error.exception.BadRequestException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -60,9 +62,10 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public GetUserProfileDto updateProfile(PutUserProfileDto putUserProfileDto, User user) {
-
         user.updateProfile(putUserProfileDto.getNickName(), putUserProfileDto.getProfileImg());
+
         userRepository.updateProfile(user);
+
         return GetUserProfileDto.fromEntity(user);
     }
 
