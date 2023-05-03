@@ -32,12 +32,12 @@ public class BoardServiceImpl implements BoardService{
                 .userId(user.getId())
                 .build();
 
-        Long boardId = boardRepository.save(board);
+        boardRepository.save(board);
 
         for (String imageUrl : saveBoardDto.getImages()) {
             Image image = Image.builder()
                     .imageUrl(imageUrl)
-                    .boardId(boardId)
+                    .boardId(board.getId())
                     .build();
             imageRepository.save(image);
         }
