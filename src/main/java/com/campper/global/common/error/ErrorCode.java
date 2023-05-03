@@ -29,10 +29,11 @@ public enum ErrorCode {
     LOGIN_FAILED(UNAUTHORIZED, "AUTH008", "로그인에 실패했습니다"),
     INVALID_TOKEN(HttpStatus.BAD_REQUEST, "AUTH009", "유효하지 않은 토큰입니다"),
     INVALID_PRINCIPAL(HttpStatus.BAD_REQUEST, "AUTH010", "인증정보가 존재하지 않습니다"),
-
+    INVALID_PASSWORD(UNAUTHORIZED, "AUTH011", "비밀번호가 일치하지 않습니다."),
 
     /* User */
-    USER_NOT_FOUND(HttpStatus.BAD_REQUEST, "USER400-1", "해당 유저가 존재하지 않습니다.");
+    USER_NOT_FOUND(HttpStatus.BAD_REQUEST, "USER001", "해당 유저가 존재하지 않습니다."),
+    DUPLICATE_AUTHKEY(HttpStatus.BAD_REQUEST,"USER002","아이디 중복 입니다.");
 
 
     private final HttpStatus httpStatus;

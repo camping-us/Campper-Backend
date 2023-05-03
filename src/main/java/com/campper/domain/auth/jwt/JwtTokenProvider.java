@@ -49,7 +49,7 @@ public class JwtTokenProvider {
 
         return Jwts.builder()
                 .setHeaderParam(Header.TYPE, Header.JWT_TYPE)
-                .setIssuer("Teampple")
+                .setIssuer("Campper")
                 .setIssuedAt(now) /**생성 일자*/
                 .setSubject(authKey)
                 .claim(AUTHORITIES_KEY, authKey) /**권한 설정*/
@@ -63,7 +63,7 @@ public class JwtTokenProvider {
 
         return Jwts.builder()
                 .setHeaderParam(Header.TYPE, Header.JWT_TYPE)
-                .setIssuer("Teampple")
+                .setIssuer("Campper")
                 .setExpiration(refreshTokenExpire)
                 .signWith(getSecretKey(), SignatureAlgorithm.HS256)
                 .compact();
