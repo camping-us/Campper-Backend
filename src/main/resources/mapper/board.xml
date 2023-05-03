@@ -2,6 +2,39 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.campper.domain.boards.mapper.BoardMapper">
+<mapper namespace="com.campper.domain.boards.repository.BoardRepository">
 
+    <resultMap id="board" type="board">
+        <result column="board_id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="content" property="content"/>
+        <result column="category" property="category"/>
+    </resultMap>
+
+    <insert id="save"
+            parameterType="Board"
+            useGeneratedKeys="true"
+            keyProperty="id"
+            keyColumn="id">
+        INSERT INTO boards (title, content, category, created_at, updated_at)
+        VALUES (#{title}, #{content}, #{category}, now(), now());
+    </insert>
+
+    <select id="findByBoardId"
+            parameterType="int"
+            resultType="Board">
+        SELECT board_id, title, content, category
+        FROM boards
+    </select>
+
+    <update id="update"
+            parameterType="Board">
+        UPDATE boards
+            SET title=#{title}, content=#{content}, category=#{category}, updated_at=now()
+        WHERE board_id=#{id};
+    </update>
+
+    <delete id="delete">
+        
+    </delete>
 </mapper>
