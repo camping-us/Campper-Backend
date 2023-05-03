@@ -24,8 +24,8 @@
 
     <select id="existByAuthKey"
             parameterType="String"
-            resultType="User">
-        SELECT * FROM users WHERE auth_key=#{authKey};
+            resultType= "Boolean">
+        SELECT exists(SELECT 1 FROM users WHERE auth_key=#{authKey});
     </select>
 
     <select id="findByAuthKey"

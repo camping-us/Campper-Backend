@@ -1,6 +1,5 @@
 package com.campper.domain.users;
 
-import com.campper.domain.users.dto.request.DelUserDto;
 import com.campper.domain.users.dto.request.PostUserDto;
 import com.campper.domain.users.dto.request.PutUserProfileDto;
 import com.campper.domain.users.dto.request.PutUserPwdDto;
@@ -24,7 +23,7 @@ import javax.validation.Valid;
 public class UserController {
     private final UserService userService;
 
-    @GetMapping("/")
+    @GetMapping("/id")
     @Operation(summary = "아이디 중복 확인 요청", description = "아이디 중복 확인 API 입니다.")
     public void getAuthKeyDuplicate(@RequestParam String authKey) {
         userService.getAuthKeyDuplicate(authKey);
@@ -54,9 +53,15 @@ public class UserController {
         return userService.getUserProfile(user);
     }
 
+    @GetMapping("/pwd")
+    @Operation(summary = "비밀번호 확인 요청", description = "비밀번호 확인 요청 API 입니다.")
+    public void checkPwd(@RequestParam String pwd, @AuthenticationPrincipal User user) {
+        userService.checkPwd(pwd, user);
+    }
+
     @DeleteMapping("/")
     @Operation(summary = "회원 탈퇴 요청", description = "회원 탈퇴 API 입니다.")
-    public void delUser(@RequestBody @Valid DelUserDto delUserDto, @AuthenticationPrincipal User user) {
-        userService.withdraw(delUserDto, user);
+    public void delUser(@AuthenticationPrincipal User user) {
+        userService.withdraw(user);
     }
 }
