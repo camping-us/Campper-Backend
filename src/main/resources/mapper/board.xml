@@ -4,12 +4,12 @@
 
 <mapper namespace="com.campper.domain.boards.repository.BoardRepository">
 
-    <resultMap id="board" type="board">
-        <result column="board_id" property="id"/>
-        <result column="title" property="title"/>
-        <result column="content" property="content"/>
-        <result column="category" property="category"/>
-    </resultMap>
+<!--    <resultMap id="board" type="board">-->
+<!--        <result column="board_id" property="id"/>-->
+<!--        <result column="title" property="title"/>-->
+<!--        <result column="content" property="content"/>-->
+<!--        <result column="category" property="category"/>-->
+<!--    </resultMap>-->
 
     <insert id="save"
             parameterType="Board"
@@ -21,7 +21,7 @@
     </insert>
 
     <select id="findByBoardId"
-            parameterType="int"
+            parameterType="Long"
             resultType="Board">
         SELECT board_id, title, content, category
         FROM boards

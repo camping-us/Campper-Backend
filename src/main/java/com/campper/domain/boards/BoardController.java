@@ -4,10 +4,12 @@ import com.campper.domain.boards.dto.request.PatchBoardDto;
 import com.campper.domain.boards.dto.request.SaveBoardDto;
 import com.campper.domain.boards.dto.response.GetBoardDetailDto;
 import com.campper.domain.boards.service.BoardService;
+import com.campper.domain.users.entity.User;
 import io.swagger.annotations.Api;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -23,9 +25,10 @@ public class BoardController {
     @PostMapping("/")
     @Operation(summary = "게시글 생성", description = "게시글 생성 요청 API 입니다.")
     public GetBoardDetailDto postBoard(
-            @RequestBody @Valid SaveBoardDto saveBoardDto
-    ) {
-        return boardService.save(saveBoardDto);
+            @RequestBody @Valid SaveBoardDto saveBoardDto,
+            @AuthenticationPrincipal User user
+            ) {
+        return boardService.save(saveBoardDto, user);
     }
 
     @GetMapping("/{id}")

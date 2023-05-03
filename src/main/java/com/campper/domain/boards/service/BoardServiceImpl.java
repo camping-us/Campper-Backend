@@ -4,10 +4,16 @@ import com.campper.domain.boards.dto.request.PatchBoardDto;
 import com.campper.domain.boards.dto.request.SaveBoardDto;
 import com.campper.domain.boards.dto.response.GetBoardDetailDto;
 import com.campper.domain.boards.entity.Board;
+import com.campper.domain.boards.entity.Image;
 import com.campper.domain.boards.repository.BoardRepository;
+import com.campper.domain.boards.repository.ImageRepository;
+import com.campper.domain.users.entity.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -15,25 +21,42 @@ import org.springframework.stereotype.Service;
 public class BoardServiceImpl implements BoardService{
 
     private final BoardRepository boardRepository;
-    // 임시 데이터 : images null 로 표시
+    private final ImageRepository imageRepository;
 
     @Override
-    public GetBoardDetailDto save(SaveBoardDto saveBoardDto) {
+    public GetBoardDetailDto save(SaveBoardDto saveBoardDto, User user) {
         Board board = Board.builder()
                 .title(saveBoardDto.getTitle())
                 .content(saveBoardDto.getContent())
                 .category(saveBoardDto.getCategory())
+                .userId(user.getId())
                 .build();
-        boardRepository.save(board);
 
-        return GetBoardDetailDto.fromEntity(board, null);
+        Long boardId = boardRepository.save(board);
+
+        for (String imageUrl : saveBoardDto.getImages()) {
+            Image image = Image.builder()
+                    .imageUrl(imageUrl)
+                    .boardId(boardId)
+                    .build();
+            imageRepository.save(image);
+        }
+
+        return GetBoardDetailDto.fromEntity(board, saveBoardDto.getImages());
     }
 
     @Override
     public GetBoardDetailDto getBoardById(Long id) {
         Board board = boardRepository.findByBoardId(id);
 
-        return GetBoardDetailDto.fromEntity(board, null);
+        // id를 가지고 이미지 하나씩 찾아야 함
+        List<String> images = new ArrayList<>();
+        List<Image> imageList = imageRepository.findByBoardId(id);
+
+        for (Image image : imageList)
+            images.add(image.getImageUrl());
+
+        return GetBoardDetailDto.fromEntity(board, images);
     }
 
     @Override
