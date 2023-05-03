@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService{
                 .pwd(passwordEncoder.encode(postUserDto.getPwd()))
                 .nickName(postUserDto.getNickName())
                 .birth(postUserDto.getBirth())
-                .role(Role.USER)
+                .role(Role.ROLE_USER)
                 .build();
 
         userRepository.save(user);
