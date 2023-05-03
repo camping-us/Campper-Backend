@@ -9,7 +9,6 @@ import com.campper.domain.users.entity.User;
 import com.campper.domain.users.repository.UserRepository;
 import com.campper.global.common.error.ErrorCode;
 import com.campper.global.common.error.exception.BadRequestException;
-import com.campper.global.common.error.exception.UnauthorizedException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -49,8 +48,8 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void updatePwd(PutUserPwdDto putUserPwdDto, User user) {
-        if (!user.getPwd().equals(putUserPwdDto.getPwd())) {
-            throw new UnauthorizedException(ErrorCode.UNAUTHORIZED_ACCESS);
+        if (!passwordEncoder.matches(putUserPwdDto.getPwd(), user.getPwd())) {
+            throw new BadRequestException(ErrorCode.INVALID_PASSWORD);
         }
 
         user.updatePwd(putUserPwdDto.getNewPwd());
@@ -82,7 +81,9 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void withdraw(User user) {
+
         user.updateIsDeleted();
+
         userRepository.delete(user);
     }
 }
