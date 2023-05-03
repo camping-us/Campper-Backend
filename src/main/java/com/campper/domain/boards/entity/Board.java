@@ -10,12 +10,14 @@ public class Board {
     private String title;
     private String content;
     private Category category;
+    private Long userId;
 
     @Builder
-    public Board(Long id, String title, String content, Category category) {
+    public Board(Long id, String title, String content, Category category, Long userId) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.category = category;
+        this.userId = userId;
     }
 }

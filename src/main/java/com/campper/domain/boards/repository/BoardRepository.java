@@ -10,7 +10,7 @@ public interface BoardRepository {
     // TODO: boolean existByBoardId(Long id);
 
     // 글 쓰기
-    int save(Board board);
+    Long save(Board board);
 
     // 글 리스트 조회
     // TODO: 글 페이지 조회
@@ -19,7 +19,7 @@ public interface BoardRepository {
     Board findByBoardId(Long id);
 
     // 글 수정
-    int update(Board board);
+    Long update(Board board);
 
     // 글 삭제
     void delete(Long id);
