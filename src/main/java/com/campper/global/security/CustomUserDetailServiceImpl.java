@@ -27,6 +27,6 @@ public class CustomUserDetailServiceImpl implements UserDetailsService {
         log.info(username);
         User user = userRepository.findByAuthKey(username)
                 .orElseThrow(() -> new UnauthorizedException(ErrorCode.INVALID_TOKEN));
-        return new CustomUserDetails(user,Collections.singleton(new SimpleGrantedAuthority(user.getRole().toString())));
+        return new CustomUserDetails(user,Collections.singleton(new SimpleGrantedAuthority(user.getRole().getViewName())));
     }
 }
