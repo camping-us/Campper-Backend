@@ -9,7 +9,7 @@ public interface BoardService {
 
     public GetBoardDetailDto save(SaveBoardDto saveBoardDto, User user);
     public GetBoardDetailDto getBoardById(Long id);
-    public GetBoardDetailDto updateBoard(Long id, PatchBoardDto patchBoardDto);
-    public void withdraw(Long id);
+    public GetBoardDetailDto updateBoard(Long id, PatchBoardDto patchBoardDto, User user);
+    public void withdraw(Long id, User user);
 
 }

@@ -43,16 +43,18 @@ public class BoardController {
     @Operation(summary = "게시글 수정", description = "게시글 수정 요청 API 입니다.")
     public GetBoardDetailDto patchBoard(
             @PathVariable Long id,
-            @RequestBody @Valid PatchBoardDto patchBoardDto
+            @RequestBody @Valid PatchBoardDto patchBoardDto,
+            @AuthenticationPrincipal User user
     ) {
-        return boardService.updateBoard(id, patchBoardDto);
+        return boardService.updateBoard(id, patchBoardDto, user);
     }
 
     @DeleteMapping("/{id}")
     @Operation(summary = "게시글 삭제", description = "게시글 삭제 요청 API 입니다.")
     public void delBoard(
-            @PathVariable Long id
+            @PathVariable Long id,
+            @AuthenticationPrincipal User user
     ) {
-        boardService.withdraw(id);
+        boardService.withdraw(id, user);
     }
 }

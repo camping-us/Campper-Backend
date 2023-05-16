@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 public interface BoardRepository {
 
     // id로 글이 있는지 확인
-    // TODO: boolean existByBoardId(Long id);
+    boolean existByBoardId(Long id);
 
     // 글 쓰기
     Long save(Board board);
