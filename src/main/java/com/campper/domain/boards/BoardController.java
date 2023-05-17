@@ -1,8 +1,10 @@
 package com.campper.domain.boards;
 
+import com.campper.domain.boards.dto.request.BoardParameterDto;
 import com.campper.domain.boards.dto.request.PatchBoardDto;
 import com.campper.domain.boards.dto.request.SaveBoardDto;
 import com.campper.domain.boards.dto.response.GetBoardDetailDto;
+import com.campper.domain.boards.dto.response.GetBoardDto;
 import com.campper.domain.boards.service.BoardService;
 import com.campper.domain.users.entity.User;
 import io.swagger.annotations.Api;
@@ -13,6 +15,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -29,6 +32,16 @@ public class BoardController {
             @AuthenticationPrincipal User user
             ) {
         return boardService.save(saveBoardDto, user);
+    }
+
+    @GetMapping("/")
+    @Operation(summary = "게시글 목록 조회", description = "게시글 목록 조회 API 입니다.")
+    public List<GetBoardDto> getBoards(
+            BoardParameterDto boardParameterDto
+    ) {
+        log.info("1:" + boardParameterDto.getSpp());
+//        BoardParameterDto boardParameterDto = new BoardParameterDto();
+        return boardService.getBoardList(boardParameterDto);
     }
 
     @GetMapping("/{id}")
