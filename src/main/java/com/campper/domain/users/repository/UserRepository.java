@@ -10,6 +10,7 @@ import java.util.Optional;
 @Mapper
 public interface UserRepository {
     boolean existByAuthKey(String authKey);
+    User findById(Long id);
     Optional<User> findByAuthKey(String authKey);
     void save(User user);
     void updatePwd(User user);
