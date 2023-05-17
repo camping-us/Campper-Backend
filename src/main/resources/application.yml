@@ -22,9 +22,15 @@ spring:
       swagger:
         use-model-v3: false
 
-logging.level:
-  org.hibernate.SQL: debug
-  org.hibernate.type: trace
+logging:
+  level:
+    com.app: debug # todo 패키지 수정
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
 
 # mapper setting
 mybatis:
