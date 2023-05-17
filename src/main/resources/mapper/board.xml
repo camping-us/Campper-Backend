@@ -13,10 +13,17 @@
         VALUES (#{title}, #{content}, #{category}, #{userId}, now(), now());
     </insert>
 
+    <select id="listBoard" parameterType="BoardParameterDto" resultType="Board">
+        SELECT *
+        FROM boards
+        order by board_id desc
+        limit #{start}, #{spp}
+    </select>
+
     <select id="findByBoardId"
             parameterType="Long"
             resultType="Board">
-        SELECT board_id, title, content, category, user_id
+        SELECT *
         FROM boards
         WHERE board_id=#{id};
     </select>
