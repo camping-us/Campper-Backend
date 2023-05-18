@@ -50,4 +50,18 @@
             WHERE board_id=#{id}
         );
     </select>
+
+    <update id="increaseLikeCnt"
+            parameterType="Long">
+        UPDATE boards
+        SET like_cnt = like_cnt + 1
+        WHERE board_id=#{id};
+    </update>
+
+    <update id="decreaseLikeCnt"
+            parameterType="Long">
+        UPDATE boards
+        SET like_cnt = like_cnt - 1
+        WHERE board_id=#{id};
+    </update>
 </mapper>

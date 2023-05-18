@@ -27,4 +27,10 @@ public interface BoardRepository {
 
     // 글 삭제
     void delete(Long id);
+
+    // 글 좋아요 수 증가
+    void increaseLikeCnt(Long id);
+
+    // 글 좋아요 수 감소
+    void decreaseLikeCnt(Long id);
 }
