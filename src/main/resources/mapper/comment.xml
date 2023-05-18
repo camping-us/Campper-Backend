@@ -51,4 +51,19 @@
         WHERE comment_id=#{id}
         );
     </select>
+
+    <update id="increaseLikeCnt"
+            parameterType="Long">
+        UPDATE comments
+        SET like_cnt = like_cnt + 1
+        WHERE comment_id=#{id};
+    </update>
+
+    <update id="decreaseLikeCnt"
+            parameterType="Long">
+        UPDATE comments
+        SET like_cnt = like_cnt - 1
+        WHERE comment_id=#{id};
+    </update>
+
 </mapper>
