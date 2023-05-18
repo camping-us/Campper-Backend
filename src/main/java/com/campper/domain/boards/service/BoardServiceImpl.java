@@ -94,6 +94,7 @@ public class BoardServiceImpl implements BoardService{
             images.add(image.getImageUrl());
 
         Board board = Board.builder()
+                .id(id)
                 .title(patchBoardDto.getTitle())
                 .content(patchBoardDto.getContent())
                 .build();
@@ -112,10 +113,9 @@ public class BoardServiceImpl implements BoardService{
     }
 
     private void boardValidate(Long id, User user) {
-        if (!boardRepository.existByBoardId(id))
-            throw new BadRequestException(ErrorCode.BOARD_NOT_FOUND);
-
         Board existBoard = boardRepository.findByBoardId(id);
+        if (existBoard == null)
+            throw new BadRequestException(ErrorCode.BOARD_NOT_FOUND);
         if (existBoard.getUserId() != user.getId())
             throw new UnauthorizedException(ErrorCode.FORBIDDEN_USER);
     }

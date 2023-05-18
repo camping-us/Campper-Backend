@@ -31,7 +31,7 @@
     <update id="update"
             parameterType="Board">
         UPDATE boards
-            SET title=#{title}, content=#{content}, category=#{category}, updated_at=now()
+            SET title=#{title}, content=#{content}, updated_at=now()
         WHERE board_id=#{id};
     </update>
 
