@@ -1,14 +1,11 @@
 package com.campper.domain.users.entity;
 
 import com.campper.global.common.entity.BaseEntity;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 
 @Getter
-@NoArgsConstructor
 public class User extends BaseEntity {
     private Long id;
     private String authKey;

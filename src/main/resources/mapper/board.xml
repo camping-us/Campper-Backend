@@ -4,27 +4,28 @@
 
 <mapper namespace="com.campper.domain.boards.repository.BoardRepository">
 
-<!--    <resultMap id="board" type="board">-->
-<!--        <result column="board_id" property="id"/>-->
-<!--        <result column="title" property="title"/>-->
-<!--        <result column="content" property="content"/>-->
-<!--        <result column="category" property="category"/>-->
-<!--    </resultMap>-->
-
     <insert id="save"
             parameterType="Board"
             useGeneratedKeys="true"
             keyProperty="id"
             keyColumn="id">
-        INSERT INTO boards (title, content, category, created_at, updated_at)
-        VALUES (#{title}, #{content}, #{category}, now(), now());
+        INSERT INTO boards (title, content, category, user_id, created_at, updated_at)
+        VALUES (#{title}, #{content}, #{category}, #{userId}, now(), now());
     </insert>
+
+    <select id="listBoard" parameterType="BoardParameterDto" resultType="Board">
+        SELECT *
+        FROM boards
+        order by board_id desc
+        limit #{start}, #{spp}
+    </select>
 
     <select id="findByBoardId"
             parameterType="Long"
             resultType="Board">
-        SELECT board_id, title, content, category
+        SELECT *
         FROM boards
+        WHERE board_id=#{id};
     </select>
 
     <update id="update"
@@ -34,7 +35,19 @@
         WHERE board_id=#{id};
     </update>
 
-    <delete id="delete">
-
+    <delete id="delete"
+            parameterType="Long">
+        UPDATE boards
+            SET is_deleted=true
+        WHERE board_id=#{id};
     </delete>
+
+    <select id="existByBoardId"
+            parameterType="Long"
+            resultType="boolean">
+        SELECT EXISTS(
+            SELECT * FROM boards
+            WHERE board_id=#{id}
+        );
+    </select>
 </mapper>
