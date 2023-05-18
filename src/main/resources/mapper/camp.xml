@@ -2,6 +2,48 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.campper.domain.camps.mapper.CampMapper">
+<!--        private Long id;-->
+<!--        private String facltNm;-->
+<!--        private String lineIntro;-->
+<!--        private String firstImageUrl;-->
+<!--        private String doNm;-->
+<!--        private String sigunguNm;-->
+<!--        private String mapX;-->
+<!--        private String mapY;-->
+<!--        private String resveCl;-->
+<!--        private String tel;-->
+<!--        private String homepage;-->
+<!--        private String resveUrl;-->
+<!--        private String allar;-->
+<!--        private String animalCmgCl;-->
+<!--        private String toiletCo;-->
+<!--        private String swrmCo;-->
+<!--        private String addr1;-->
+<!--        private String addr2;-->
+<!--        private String glampInnerFclty;-->
+<!--        private String caravInnerFclty;-->
+<!--        private Long dibCnt;-->
+<mapper namespace="com.campper.domain.camps.mapper.CampInterface">
+
+    <insert id="saveList"
+            parameterType="java.util.List"
+            useGeneratedKeys="true"
+            keyProperty="id"
+            keyColumn="id">
+        INSERT INTO camps (faclt_nm, line_intro, first_image_url, do_nm, sigungu_nm, map_x, map_y, resve_cl, tel, homepage, resve_url, allar, animal_cmg_cl, toilet_co, swrm_co, addr1, addr2, glamp_inner_fclty, carav_inner_fclty, dib_cnt)
+        VALUES
+        <foreach item="item" index="index" collection="list" separator=",">
+            (#{item.facltNm}, #{item.lineIntro}, #{item.firstImageUrl}, #{item.doNm}, #{item.sigunguNm}, #{item.mapX}, #{item.mapY}, #{item.resveCl}, #{item.tel},
+            #{item.homepage}, #{item.resveUrl}, #{item.allar}, #{item.animalCmgCl}, #{item.toiletCo}, #{item.swrmCo}, #{item.addr1}, #{item.addr2},
+            #{item.glampInnerFclty}, #{item.caravInnerFclty}, 0)
+        </foreach>
+    </insert>
+
+    <update id="updateDibs"
+            parameterType="Camp">
+        UPDATE camps
+        SET dib_cnt=#{dibCnt}
+        WHERE id=#{id} ;
+    </update>
 
 </mapper>
