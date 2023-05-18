@@ -17,7 +17,7 @@ public interface BoardRepository {
     Long save(Board board);
 
     // 글 리스트 조회
-    public List<Board> listBoard(BoardParameterDto boardParameterDto);
+    List<Board> listBoard(BoardParameterDto boardParameterDto);
 
     // 글 상세 조회
     Board findByBoardId(Long id);

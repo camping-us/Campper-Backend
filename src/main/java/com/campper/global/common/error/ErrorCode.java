@@ -36,7 +36,10 @@ public enum ErrorCode {
     DUPLICATE_AUTHKEY(HttpStatus.BAD_REQUEST,"USER002","아이디 중복 입니다."),
 
     /* Board */
-    BOARD_NOT_FOUND(HttpStatus.BAD_REQUEST, "BOARD001", "해당 게시글이 존재하지 않습니다.");
+    BOARD_NOT_FOUND(HttpStatus.BAD_REQUEST, "BOARD001", "해당 게시글이 존재하지 않습니다."),
+
+    /* Comment */
+    COMMENT_NOT_FOUND(HttpStatus.BAD_REQUEST, "COMMENT001", "해당 댓글이 존재하지 않습니다.");
 
     private final HttpStatus httpStatus;
     private final String code;

@@ -39,8 +39,6 @@ public class BoardController {
     public List<GetBoardDto> getBoards(
             BoardParameterDto boardParameterDto
     ) {
-        log.info("1:" + boardParameterDto.getSpp());
-//        BoardParameterDto boardParameterDto = new BoardParameterDto();
         return boardService.getBoardList(boardParameterDto);
     }
 
