@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @Slf4j
 @Service
@@ -30,7 +29,17 @@ public class CampServiceImpl implements CampService {
     @Override
     @Transactional
     public void loadOpenApi() {
-        FeignCampDto feignCampDto = campInfoClient.callOpenApi(serviceKey, 1L, 1L, mobileOs, serviceName, "json");
+        FeignCampDto feignCampDto = campInfoClient.callOpenApi(serviceKey, 3467L, 1L, mobileOs, serviceName, "json");
         log.info(String.valueOf(feignCampDto));
+
+        ArrayList<Camp> camps = new ArrayList<>();
+        for (FeignCampDto.Response.Body.Items.Item item : feignCampDto.getResponse().getBody().getItems().getList()) {
+            Camp camp = FeignCampDto.toEntity(item);
+            camps.add(camp);
+            log.info(String.valueOf(camp));
+        }
+        log.info(""+camps.size());
+        campInterface.saveList(camps);
+
     }
 }

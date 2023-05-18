@@ -8,4 +8,5 @@ import java.util.List;
 @Mapper
 public interface CampInterface {
     void saveList(List<Camp> camps);
+    void updateDibs(Camp camp);
 }

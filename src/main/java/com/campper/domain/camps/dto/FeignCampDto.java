@@ -6,37 +6,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.util.List;
-import java.util.Map;
 
 @Data
 public class FeignCampDto {
-
-//    @JsonProperty("response")
-//    private Map<String, Map<String, Object>> response;
-//
-////    @JsonProperty("response/body/items")
-//    private Items items = (Items) response.get("body").get("items");
-//
-//    @Data
-//    public static class Items {
-//        @JsonProperty("item")
-//        private final List<Item> list;
-//
-//        @JsonCreator
-//        public Items(List<Item> list) {
-//            this.list = list;
-//        }
-//
-//        @Data
-//        public static class Item {
-//            @JsonProperty("lineIntro")
-//            private String lineIntro;
-//
-//            @JsonProperty("homepage")
-//            private String homepage;
-//        }
-//    }
-
     @JsonProperty("response")
     private Response response;
 
@@ -52,30 +24,62 @@ public class FeignCampDto {
 
             @Data
             public static class Items {
-                @JsonProperty("item")
                 private final List<Item> list;
 
                 @JsonCreator
-                public Items(List<Item> list) {
+                public Items(@JsonProperty("item") List<Item> list) {
                     this.list = list;
                 }
 
                 @Data
                 public static class Item {
-                    @JsonProperty("lineIntro")
+                    private String facltNm;
                     private String lineIntro;
-
-                    @JsonProperty("homepage")
+                    private String firstImageUrl;
+                    private String doNm;
+                    private String sigunguNm;
+                    private String mapX;
+                    private String mapY;
+                    private String resveCl;
+                    private String tel;
                     private String homepage;
+                    private String resveUrl;
+                    private String allar;
+                    private String animalCmgCl;
+                    private String toiletCo;
+                    private String swrmCo;
+                    private String addr1;
+                    private String addr2;
+                    private String glampInnerFclty;
+                    private String caravInnerFclty;
+
                 }
             }
         }
     }
 
-    public static Camp toEntity(FeignCampDto feignCampDto) {
+
+    public static Camp toEntity(Response.Body.Items.Item item) {
         return Camp.builder()
-//                .lineIntro(feignCampDto.getItems().getItem().getLineIntro())
-//                .homePage(feignCampDto.getItems().getItem().getLineIntro())
+                .facltNm(item.getFacltNm())
+                .lineIntro(item.getLineIntro())
+                .firstImageUrl(item.getFirstImageUrl())
+                .doNm(item.getDoNm())
+                .sigunguNm(item.getSigunguNm())
+                .mapX(item.getMapX())
+                .mapY(item.getMapY())
+                .resveCl(item.getResveCl())
+                .tel(item.getTel())
+                .homepage(item.getHomepage())
+                .resveUrl(item.getResveUrl())
+                .allar(item.getAllar())
+                .animalCmgCl(item.getAnimalCmgCl())
+                .toiletCo(item.getToiletCo())
+                .swrmCo(item.getSwrmCo())
+                .addr1(item.getAddr1())
+                .addr2(item.getAddr2())
+                .glampInnerFclty(item.getGlampInnerFclty())
+                .caravInnerFclty(item.getCaravInnerFclty())
                 .build();
     }
 
