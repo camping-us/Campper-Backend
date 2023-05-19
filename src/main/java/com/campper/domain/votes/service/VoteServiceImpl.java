@@ -1,6 +1,6 @@
 package com.campper.domain.votes.service;
 
-import com.campper.domain.camps.mapper.VoteCampRepository;
+import com.campper.domain.camps.repository.VoteCampRepository;
 import com.campper.domain.users.entity.User;
 import com.campper.domain.votes.dto.VoteInfo;
 import com.campper.domain.votes.dto.request.PostVoteDto;
@@ -9,7 +9,6 @@ import com.campper.domain.votes.entity.Vote;
 import com.campper.domain.votes.repository.VoteRepository;
 import com.campper.global.common.error.ErrorCode;
 import com.campper.global.common.error.exception.UnauthorizedException;
-import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

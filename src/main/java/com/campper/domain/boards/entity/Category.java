@@ -1,5 +1,6 @@
 package com.campper.domain.boards.entity;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import lombok.Getter;
 
 @Getter
@@ -12,5 +13,14 @@ public enum Category {
 
     Category(String name) {
         this.name = name;
+    }
+
+    @JsonCreator
+    public static Category fromDto(String name) {
+        for (Category category : Category.values()) {
+            if (category.getName().equals(name))
+                return category;
+        }
+        return null;
     }
 }

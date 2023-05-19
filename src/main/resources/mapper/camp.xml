@@ -23,7 +23,7 @@
 <!--        private String glampInnerFclty;-->
 <!--        private String caravInnerFclty;-->
 <!--        private Long dibCnt;-->
-<mapper namespace="com.campper.domain.camps.mapper.CampInterface">
+<mapper namespace="com.campper.domain.camps.repository.CampRepository">
 
     <insert id="saveList"
             parameterType="java.util.List"
@@ -52,5 +52,19 @@
         SELECT * FROM camps
         WHERE id=#{id};
     </select>
+
+    <update id="increaseDibsCnt"
+            parameterType="Long">
+        UPDATE camps
+        SET dib_cnt = dib_cnt + 1
+        WHERE id=#{id};
+    </update>
+
+    <update id="decreaseDibsCnt"
+            parameterType="Long">
+        UPDATE camps
+        SET dib_cnt = dib_cnt - 1
+        WHERE id=#{id};
+    </update>
 
 </mapper>

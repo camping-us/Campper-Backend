@@ -1,8 +1,8 @@
 package com.campper.infra.feign;
 
 import com.campper.domain.camps.entity.Camp;
-import com.campper.domain.camps.mapper.CampInterface;
-import com.campper.domain.camps.mapper.VoteCampRepository;
+import com.campper.domain.camps.repository.CampRepository;
+import com.campper.domain.camps.repository.VoteCampRepository;
 import com.campper.domain.users.entity.Role;
 import com.campper.domain.users.entity.User;
 import com.campper.global.common.error.ErrorCode;
@@ -25,7 +25,7 @@ import java.util.stream.IntStream;
 @Transactional(readOnly = true)
 public class FeignServiceImpl implements FeignService{
     private final CampInfoClient campInfoClient;
-    private final CampInterface campInterface;
+    private final CampRepository campRepository;
     private final VoteCampRepository voteCampRepository;
 
     private static final String mobileOs = "ETC";
@@ -50,7 +50,7 @@ public class FeignServiceImpl implements FeignService{
             camps.add(camp);
         }
         log.info(""+camps.size());
-        campInterface.saveList(camps);
+        campRepository.saveList(camps);
 
         voteCampRepository.saves(IntStream.iterate(1, i -> i + 1)
                 .limit(camps.size())

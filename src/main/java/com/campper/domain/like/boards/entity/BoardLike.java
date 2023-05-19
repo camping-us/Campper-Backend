@@ -9,7 +9,8 @@ public class BoardLike {
     private Long userId;
     private Long boardId;
 
-    @Builder BoardLike(Long userId, Long boardId) {
+    @Builder
+    BoardLike(Long userId, Long boardId) {
         this.userId = userId;
         this.boardId = boardId;
     }

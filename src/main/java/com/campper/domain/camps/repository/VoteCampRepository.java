@@ -1,4 +1,4 @@
-package com.campper.domain.camps.mapper;
+package com.campper.domain.camps.repository;
 
 import com.campper.domain.camps.entity.VoteCamp;
 import com.campper.domain.votes.entity.Vote;
