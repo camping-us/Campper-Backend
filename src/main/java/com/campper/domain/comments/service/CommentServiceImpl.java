@@ -27,11 +27,11 @@ public class CommentServiceImpl implements CommentService{
     private final UserRepository userRepository;
 
     @Override
-    public GetCommentDto save(SaveCommentDto saveCommentDto, User user) {
+    public GetCommentDto save(Long boardId, SaveCommentDto saveCommentDto, User user) {
         Comment comment = Comment.builder()
                 .content(saveCommentDto.getContent())
                 .userId(user.getId())
-                .boardId(saveCommentDto.getBoardId())
+                .boardId(boardId)
                 .build();
 
         commentRepository.save(comment);
@@ -40,13 +40,14 @@ public class CommentServiceImpl implements CommentService{
     }
 
     @Override
-    public List<GetCommentDto> getCommentList(CommentParameterDto commentParameterDto) {
+    public List<GetCommentDto> getCommentList(Long boardId, CommentParameterDto commentParameterDto) {
         List<GetCommentDto> comments = new ArrayList<>();
 
         int start = commentParameterDto.getPg() == 0 ? 0 : (commentParameterDto.getPg() - 1) * commentParameterDto.getSpp();
         commentParameterDto.setStart(start);
+
         List<Comment> commentList = commentRepository.listComment(commentParameterDto);
-        log.info("commentList");
+
         for (Comment comment : commentList) {
             User user = userRepository.findById(comment.getUserId());
             String userName = user.getNickName();

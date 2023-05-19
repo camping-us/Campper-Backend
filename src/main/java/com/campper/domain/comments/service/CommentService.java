@@ -10,8 +10,8 @@ import java.util.List;
 
 public interface CommentService {
 
-    public GetCommentDto save(SaveCommentDto saveCommentDto, User user);
-    public List<GetCommentDto> getCommentList(CommentParameterDto commentParameterDto);
+    public GetCommentDto save(Long boardId, SaveCommentDto saveCommentDto, User user);
+    public List<GetCommentDto> getCommentList(Long boardId, CommentParameterDto commentParameterDto);
     public GetCommentDto updateComment(Long boardId, PatchCommentDto patchCommentDto, User user);
     public void withdraw(Long id, User user);
 }

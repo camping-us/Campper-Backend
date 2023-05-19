@@ -25,21 +25,23 @@ public class CommentController {
 
     private final CommentService commentService;
 
-    @PostMapping("/")
+    @PostMapping("/{boardId}")
     @Operation(summary = "댓글 생성", description = "댓글 생성 요청 API 입니다.")
     public GetCommentDto postComment(
+            @PathVariable Long boardId,
             @RequestBody @Valid SaveCommentDto saveCommentDto,
             @AuthenticationPrincipal User user
     ) {
-        return commentService.save(saveCommentDto, user);
+        return commentService.save(boardId, saveCommentDto, user);
     }
 
-    @GetMapping("/")
+    @GetMapping("/{boardId}")
     @Operation(summary = "댓글 목록 조회", description = "댓글 목록 조회 API 입니다.")
     public List<GetCommentDto> getBoards(
+            @PathVariable Long boardId,
             CommentParameterDto commentParameterDto
     ) {
-        return commentService.getCommentList(commentParameterDto);
+        return commentService.getCommentList(boardId, commentParameterDto);
     }
 
     @PatchMapping("/")
