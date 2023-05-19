@@ -3,7 +3,7 @@ package com.campper.domain.camps.service;
 import com.campper.domain.camps.CampInfoClient;
 import com.campper.domain.camps.dto.FeignCampDto;
 import com.campper.domain.camps.entity.Camp;
-import com.campper.domain.camps.mapper.CampInterface;
+import com.campper.domain.camps.repository.CampRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,7 +18,7 @@ import java.util.ArrayList;
 @Transactional(readOnly = true)
 public class CampServiceImpl implements CampService {
     private final CampInfoClient campInfoClient;
-    private final CampInterface campInterface;
+    private final CampRepository campInterface;
 
     private static final String mobileOs = "ETC";
     @Value("${SERVICE_NAME}")
