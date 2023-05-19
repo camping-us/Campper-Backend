@@ -1,4 +1,4 @@
-package com.campper.domain.camps.dto;
+package com.campper.infra.feign.camp.dto;
 
 import com.campper.domain.camps.entity.Camp;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -8,7 +8,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class FeignCampDto {
+public class CampDto {
     @JsonProperty("response")
     private Response response;
 

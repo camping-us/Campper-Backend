@@ -2,10 +2,8 @@ package com.campper.domain.camps.entity;
 
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Getter
-@NoArgsConstructor
 public class Camp {
     private Long id;
     private String facltNm;
@@ -31,7 +29,6 @@ public class Camp {
 
 
     @Builder
-
     public Camp(Long id, String facltNm, String lineIntro, String firstImageUrl, String doNm, String sigunguNm, String mapX, String mapY, String resveCl, String tel, String homepage, String resveUrl, String allar, String animalCmgCl, String toiletCo, String swrmCo, String addr1, String addr2, String glampInnerFclty, String caravInnerFclty, Long dibCnt) {
         this.id = id;
         this.facltNm = facltNm;

@@ -46,6 +46,13 @@
         WHERE id=#{id} ;
     </update>
 
+    <select id="findById"
+            parameterType="Long"
+            resultType="Camp">
+        SELECT * FROM camps
+        WHERE id=#{id};
+    </select>
+
     <update id="increaseDibsCnt"
             parameterType="Long">
         UPDATE camps
