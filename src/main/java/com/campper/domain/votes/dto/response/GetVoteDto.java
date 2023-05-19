@@ -1,6 +1,7 @@
 package com.campper.domain.votes.dto.response;
 
 import com.campper.domain.votes.entity.Vote;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,12 +9,19 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class GetVoteDto {
+    @ApiModelProperty(notes = "투표 id", required = true)
     private Long id;
+    @ApiModelProperty(notes = "전체 평점", required = true)
     private int total;
+    @ApiModelProperty(notes = "접근성 ", required = true)
     private int location;
+    @ApiModelProperty(notes = "청결도", required = true)
     private int cleanliness;
+    @ApiModelProperty(notes = "친절도", required = true)
     private int kindness;
+    @ApiModelProperty(notes = "가격 적합도", required = true)
     private int price;
+    @ApiModelProperty(notes = "부대 시설", required = true)
     private int facilities;
 
     @Builder
