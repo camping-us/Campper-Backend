@@ -2,6 +2,66 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.campper.domain.boards.mapper.BoardMapper">
+<mapper namespace="com.campper.domain.boards.repository.BoardRepository">
 
+    <insert id="save"
+            parameterType="Board"
+            useGeneratedKeys="true"
+            keyProperty="id"
+            keyColumn="id">
+        INSERT INTO boards (title, content, category, user_id, created_at, updated_at)
+        VALUES (#{title}, #{content}, #{category}, #{userId}, now(), now());
+    </insert>
+
+    <select id="listBoard" parameterType="BoardParameterDto" resultType="Board">
+        SELECT *
+        FROM boards
+        order by board_id desc
+        limit #{start}, #{spp}
+    </select>
+
+    <select id="findByBoardId"
+            parameterType="Long"
+            resultType="Board">
+        SELECT *
+        FROM boards
+        WHERE board_id=#{id};
+    </select>
+
+    <update id="update"
+            parameterType="Board">
+        UPDATE boards
+            SET title=#{title}, content=#{content}, updated_at=now()
+        WHERE board_id=#{id};
+    </update>
+
+    <delete id="delete"
+            parameterType="Long">
+        UPDATE boards
+            SET is_deleted=true
+        WHERE board_id=#{id};
+    </delete>
+
+    <select id="existByBoardId"
+            parameterType="Long"
+            resultType="boolean">
+        SELECT EXISTS(
+            SELECT * FROM boards
+            WHERE board_id=#{id}
+        );
+    </select>
+
+    <update id="increaseLikeCnt"
+            parameterType="Long">
+        UPDATE boards
+        SET like_cnt = like_cnt + 1
+        WHERE board_id=#{id};
+    </update>
+
+    <update id="decreaseLikeCnt"
+            parameterType="Long">
+        UPDATE boards
+        SET like_cnt = like_cnt - 1
+        WHERE board_id=#{id};
+    </update>
 </mapper>

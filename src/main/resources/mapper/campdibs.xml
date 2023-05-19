@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.campper.domain.like.camps.repository.CampDibsRepository">
+
+    <insert id="dibs"
+            parameterType="CampDibs">
+        INSERT INTO camp_dibs (user_id, camp_id)
+        VALUES (#{userId}, #{campId});
+    </insert>
+
+    <delete id="dibsCancel"
+            parameterType="CampDibs">
+        DELETE FROM camp_dibs
+        WHERE user_id=#{userId} AND camp_id=#{campId};
+    </delete>
+
+    <select id="existByCampIdAndUserId"
+            parameterType="CampDibs"
+            resultType="boolean">
+        SELECT EXISTS(
+        SELECT * FROM camp_dibs
+        WHERE camp_id=#{campId} AND user_id=#{userId}
+        );
+    </select>
+</mapper>

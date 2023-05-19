@@ -1,5 +1,6 @@
 package com.campper.global.config;
 
+import com.campper.global.common.filter.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,7 +26,7 @@ public class SecurityConfig {
             "/v2/api-docs"
     };
 
-//    private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
 //    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 //    private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
 
@@ -47,9 +48,7 @@ public class SecurityConfig {
                 /**해당 요청 누구나 접근 가능*/
                 .antMatchers(SwaggerPatterns).permitAll()
                 .antMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
-                .antMatchers("/**","/auth/login", "/auth/info").permitAll()
-                .antMatchers("/oauth/**").permitAll()
-                .antMatchers("/invitations/validation").permitAll() // 초대 코드 검증
+                .antMatchers("/**","/login").permitAll()
                 /**인증 된 사용자만 사용 가능*/
                 .anyRequest().authenticated();
 
@@ -60,7 +59,7 @@ public class SecurityConfig {
                 .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID");
 
-//        http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }

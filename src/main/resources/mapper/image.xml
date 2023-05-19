@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.campper.domain.boards.repository.ImageRepository">
+
+<!--    <resultMap id="image" type="image">-->
+<!--        <result column="image_id" property="id"/>-->
+<!--        <result column="url" property="imageUrl"/>-->
+<!--        <result column="board_id" property="boardId"/>-->
+<!--    </resultMap>-->
+
+    <insert id="save"
+            parameterType="Image"
+            useGeneratedKeys="true"
+            keyProperty="id"
+            keyColumn="id">
+        INSERT INTO images (url, board_id)
+        VALUES (#{imageUrl}, #{boardId})
+    </insert>
+    
+    <select id="findByBoardId"
+            parameterType="Long"
+            resultType="Image">
+        SELECT image_id, url, board_id
+        FROM images
+        WHERE board_id = #{id}
+    </select>
+</mapper>

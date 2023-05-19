@@ -2,6 +2,64 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.campper.domain.users.mapper.UserMapper">
+<mapper namespace="com.campper.domain.users.repository.UserRepository">
+
+<!--    private Long id;-->
+<!--    private String authKey;-->
+<!--    private String email;-->
+<!--    private String pwd;-->
+<!--    private LocalDate birth;-->
+<!--    private String nickName;-->
+<!--    private String profileImg;-->
+<!--    private Role role;-->
+
+    <insert id="save"
+            parameterType="User"
+            useGeneratedKeys="true"
+            keyProperty="id"
+            keyColumn="id">
+        INSERT INTO users (auth_key, email, pwd, birth, nick_name, profile_img, role, is_deleted, created_at, updated_at)
+        VALUES (#{authKey}, #{email}, #{pwd}, #{birth}, #{nickName}, #{profileImg}, #{role}, #{isDeleted}, now(), now());
+    </insert>
+
+    <select id="findById"
+            parameterType="Long"
+            resultType="User">
+        SELECT * FROM users
+        WHERE id=#{id};
+    </select>
+
+    <select id="existByAuthKey"
+            parameterType="String"
+            resultType= "Boolean">
+        SELECT exists(SELECT 1 FROM users WHERE auth_key=#{authKey});
+    </select>
+
+    <select id="findByAuthKey"
+            parameterType="String"
+            resultType="User">
+        SELECT * FROM users WHERE auth_key=#{authKey};
+    </select>
+    
+    <update id="updatePwd"
+            parameterType="User">
+        UPDATE users
+        SET pwd=#{pwd}, updated_at=now()
+        WHERE id=#{id};
+    </update>
+
+    <update id="updateProfile"
+            parameterType="User">
+        UPDATE users
+        SET nick_name=#{nickName}, profile_img=#{profileImg}, updated_at=now()
+        WHERE id=#{id} ;
+    </update>
+
+    <update id="delete"
+            parameterType="User">
+        UPDATE users
+        SET is_deleted=#{isDeleted}, updated_at=now()
+        WHERE id=#{id} ;
+    </update>
 
 </mapper>

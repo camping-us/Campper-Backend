@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.campper.domain.like.comments.repository.CommentLikeRepository">
+
+    <insert id="like"
+            parameterType="CommentLike">
+        INSERT INTO comment_like (user_id, comment_id)
+        VALUES (#{userId}, #{commentId});
+    </insert>
+
+    <delete id="likeCancel"
+            parameterType="CommentLike">
+        DELETE FROM comment_like
+        WHERE user_id=#{userId} AND comment_id=#{commentId};
+    </delete>
+
+    <select id="existByCommentIdAndUserId"
+            parameterType="CommentLike"
+            resultType="boolean">
+        SELECT EXISTS(
+        SELECT * FROM comment_like
+        WHERE comment_id=#{commentId} AND user_id=#{userId}
+        );
+    </select>
+</mapper>
