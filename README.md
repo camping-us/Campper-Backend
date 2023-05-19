@@ -31,7 +31,8 @@
   
 
 ## 📝 ERD
-![image](https://user-images.githubusercontent.com/62806067/235578181-1ceea959-77c8-4665-a71e-30a552ea9efa.png)
+![image](https://github.com/camping-us/Campper-Backend/assets/62806067/6a919fda-7630-459f-b6b9-a6ba5916d5ad)
+
 
 
 <br/>
