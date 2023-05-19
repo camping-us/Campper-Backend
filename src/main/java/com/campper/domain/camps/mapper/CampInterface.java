@@ -9,4 +9,6 @@ import java.util.List;
 public interface CampInterface {
     void saveList(List<Camp> camps);
     void updateDibs(Camp camp);
+
+    Camp findById(Long id);
 }
