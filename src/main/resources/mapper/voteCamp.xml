@@ -1,6 +1,50 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-</beans>
+<!--        private Long id;-->
+<!--        private Long campId;-->
+
+<!--        private Long total;-->
+<!--        private Long location;-->
+<!--        private Long cleanliness;-->
+<!--        private Long kindness;-->
+<!--        private Long price;-->
+<!--        private Long facilities;-->
+
+<!--        private Long voteCnt;-->
+<mapper namespace="com.campper.domain.camps.mapper.VoteCampRepository">
+    <select id="findByCampId"
+            parameterType="Long"
+            resultType="VoteCamp">
+        SELECT * FROM vote_camps
+        WHERE camp_id=#{camp_id};
+    </select>
+
+    <update id="updateIncrease"
+            parameterType="Vote">
+        UPDATE vote_camps
+        SET total=total+#{total}, location=location+#{location}, cleanliness=cleanliness+#{cleanliness},
+            kindness=kindness+#{kindness}, price=price+#{price}, facilities=facilities+#{facilities}, vote_cnt=vote_cnt+1
+        WHERE id=#{id};
+    </update>
+
+    <update id="updateDecrease"
+            parameterType="Vote">
+        UPDATE vote_camps
+        SET total=total-#{total}, location=location-#{location}, cleanliness=cleanliness-#{cleanliness},
+            kindness=kindness-#{kindness}, price=price-#{price}, facilities=facilities-#{facilities}, vote_cnt=vote_cnt-1
+        WHERE id=#{id};
+    </update>
+
+    <insert id="saves"
+            parameterType="java.util.List">
+        INSERT INTO vote_camps (camp_id, total, location, cleanliness, kindness, price, facilities, vote_cnt)
+        VALUE
+        <foreach item="item" index="index" collection="list" separator=",">
+            (#{item}, 0, 0, 0, 0, 0, 0, 0)
+        </foreach>
+    </insert>
+
+
+</mapper>

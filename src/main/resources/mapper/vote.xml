@@ -2,6 +2,44 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.campper.domain.votes.repository.VoteRepository">
+<!--        private Long userId;-->
+<!--        private Long campId;-->
 
+<!--        private int total;-->
+<!--        private int location;-->
+<!--        private int cleanliness;-->
+<!--        private int kindness;-->
+<!--        private int price;-->
+<!--        private int facilities;-->
+
+<mapper namespace="com.campper.domain.votes.repository.VoteRepository">
+    <insert id="save"
+            parameterType="Vote"
+            useGeneratedKeys="true"
+            keyProperty="id"
+            keyColumn="id">
+        INSERT INTO votes (user_id, camp_id, total, location, cleanliness, kindness, price, facilities, is_deleted, created_at, updated_at)
+        VALUES (#{userId}, #{campId}, #{total}, #{location}, #{cleanliness}, #{kindness}, #{price},#{facilities}, #{isDeleted}, now(), now());
+    </insert>
+
+    <update id="update"
+        parameterType="Vote">
+        UPDATE votes
+        SET is_deleted=#{isDeleted}
+        WHERE id=#{id} ;
+    </update>
+
+    <select id="findByCampIdAndUserId"
+            parameterType="VoteInfo"
+            resultType="Vote">
+        SELECT * FROM votes
+        WHERE camp_id=#{campId} AND user_id=#{userId};
+    </select>
+
+    <select id="findById"
+            parameterType="Long"
+            resultType="Vote">
+        SELECT * FROM votes
+        WHERE id=#{id};
+    </select>
 </mapper>
