@@ -25,7 +25,7 @@ import java.util.List;
 public class BoardController {
 
     private final BoardService boardService;
-    @PostMapping("/")
+    @PostMapping("")
     @Operation(summary = "게시글 생성", description = "게시글 생성 요청 API 입니다.")
     public GetBoardDetailDto postBoard(
             @RequestBody @Valid SaveBoardDto saveBoardDto,
@@ -34,7 +34,7 @@ public class BoardController {
         return boardService.save(saveBoardDto, user);
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     @Operation(summary = "게시글 목록 조회", description = "게시글 목록 조회 API 입니다.")
     public List<GetBoardDto> getBoards(
             BoardParameterDto boardParameterDto
