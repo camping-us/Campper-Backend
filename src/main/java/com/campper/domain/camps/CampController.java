@@ -17,7 +17,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/place")
+@RequestMapping(value = "/places")
 @Api(tags = "캠핑장")
 public class CampController {
     private final CampService campService;
