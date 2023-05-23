@@ -28,7 +28,6 @@ public class CommentController {
     @PostMapping("")
     @Operation(summary = "댓글 생성", description = "댓글 생성 요청 API 입니다.")
     public GetCommentDto postComment(
-            @PathVariable Long boardId,
             @RequestBody @Valid SaveCommentDto saveCommentDto,
             @AuthenticationPrincipal User user
     ) {
@@ -38,10 +37,10 @@ public class CommentController {
     @GetMapping("")
     @Operation(summary = "댓글 목록 조회", description = "댓글 목록 조회 API 입니다.")
     public List<GetCommentDto> getBoards(
-            @PathVariable Long boardId,
+            @RequestParam Long boardId,
             CommentParameterDto commentParameterDto
     ) {
-        return commentService.getCommentList(commentParameterDto);
+        return commentService.getCommentList(boardId, commentParameterDto);
     }
 
     @PutMapping("")
