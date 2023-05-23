@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -33,13 +34,18 @@ public class GetBoardDto {
     @NotNull
     private int likeCnt;
 
+    @ApiModelProperty(value = "작성일", example = "2023-05-23T11:36:58")
+    @NotNull
+    private LocalDateTime createdAt;
+
     @Builder
-    public GetBoardDto(Long id, String userName, String title, String content, int likeCnt) {
+    public GetBoardDto(Long id, String userName, String title, String content, int likeCnt, LocalDateTime createdAt) {
         this.id=id;
         this.userName=userName;
         this.title=title;
         this.content=content;
         this.likeCnt=likeCnt;
+        this.createdAt=createdAt;
     }
 
     public static GetBoardDto fromEntity(Board board, String userName) {
@@ -49,6 +55,7 @@ public class GetBoardDto {
                 .title(board.getTitle())
                 .content(board.getContent())
                 .likeCnt(board.getLikeCnt())
+                .createdAt(board.getCreatedAt())
                 .build();
     }
 

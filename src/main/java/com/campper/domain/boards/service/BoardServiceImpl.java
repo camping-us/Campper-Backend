@@ -71,6 +71,8 @@ public class BoardServiceImpl implements BoardService{
         List<String> images = new ArrayList<>();
         Board board = boardRepository.findByBoardId(id);
 
+        log.info("c: " + board.getCreatedAt());
+
         List<Image> imageList = imageRepository.findByBoardId(id);
         for (Image image : imageList)
             images.add(image.getImageUrl());
