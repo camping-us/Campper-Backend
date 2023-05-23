@@ -14,6 +14,10 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class SaveCommentDto {
 
+    @ApiModelProperty(value = "게시글 아이디", example = "2")
+    @NotNull
+    private Long boardId;
+
     @ApiModelProperty(value = "댓글 내용", example = "강아지는 너무 귀여워요")
     @NotNull
     private String content;
