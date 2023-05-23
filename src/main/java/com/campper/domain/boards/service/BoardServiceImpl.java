@@ -38,9 +38,7 @@ public class BoardServiceImpl implements BoardService{
                 .category(saveBoardDto.getCategory())
                 .userId(user.getId())
                 .build();
-
         boardRepository.save(board);
-
         for (String imageUrl : saveBoardDto.getImages()) {
             Image image = Image.builder()
                     .imageUrl(imageUrl)
@@ -49,7 +47,7 @@ public class BoardServiceImpl implements BoardService{
             imageRepository.save(image);
         }
 
-        return GetBoardDetailDto.fromEntity(board, user.getNickName(), saveBoardDto.getImages());
+        return GetBoardDetailDto.fromEntity(board, user.getId(), user.getNickName(), saveBoardDto.getImages());
     }
 
     @Override
@@ -79,7 +77,7 @@ public class BoardServiceImpl implements BoardService{
 
         User user = userRepository.findById(board.getUserId());
 
-        return GetBoardDetailDto.fromEntity(board, user.getNickName(), images);
+        return GetBoardDetailDto.fromEntity(board, user.getId(), user.getNickName(), images);
     }
 
     @Override
@@ -101,7 +99,7 @@ public class BoardServiceImpl implements BoardService{
 
         boardRepository.update(board);
 
-        return GetBoardDetailDto.fromEntity(board, user.getNickName(), images);
+        return GetBoardDetailDto.fromEntity(board, user.getId(), user.getNickName(), images);
     }
 
     @Override
