@@ -28,20 +28,19 @@ public class CommentController {
     @PostMapping("")
     @Operation(summary = "댓글 생성", description = "댓글 생성 요청 API 입니다.")
     public GetCommentDto postComment(
+            @PathVariable Long boardId,
             @RequestBody @Valid SaveCommentDto saveCommentDto,
             @AuthenticationPrincipal User user
     ) {
-        log.info("comment info = " + saveCommentDto.getBoardId() + "::" + saveCommentDto.getContent());
-        log.info("user info = " + user.getNickName());
         return commentService.save(saveCommentDto, user);
     }
 
     @GetMapping("")
     @Operation(summary = "댓글 목록 조회", description = "댓글 목록 조회 API 입니다.")
     public List<GetCommentDto> getBoards(
+            @PathVariable Long boardId,
             CommentParameterDto commentParameterDto
     ) {
-        log.info("AA:" + commentParameterDto.getBoardId());
         return commentService.getCommentList(commentParameterDto);
     }
 

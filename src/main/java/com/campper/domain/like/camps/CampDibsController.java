@@ -22,7 +22,7 @@ public class CampDibsController {
     private final CampDibsService campDibsService;
 
     @PostMapping("/{id}")
-    @Operation(summary = "캠프 찜", description = "캠프 찜 누르는 요청 API 입니다. 이미 누른 경우에는 좋아요 취소가 됩니다.")
+    @Operation(summary = "캠핑장 찜", description = "캠핑장 찜 누르는 요청 API 입니다. 이미 누른 경우에는 좋아요 취소가 됩니다.")
     public void postCampDibs(
             @PathVariable Long id,
             @AuthenticationPrincipal User user

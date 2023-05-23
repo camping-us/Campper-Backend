@@ -9,6 +9,7 @@ import java.util.List;
 public interface CampRepository {
     void saveList(List<Camp> camps);
     void updateDibs(Camp camp);
+    Camp findById(Long id);
     void increaseDibsCnt(Long id);
     void decreaseDibsCnt(Long id);
 }

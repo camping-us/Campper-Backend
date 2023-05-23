@@ -1,6 +1,6 @@
-package com.campper.domain.camps;
+package com.campper.infra.feign.camp.client;
 
-import com.campper.domain.camps.dto.FeignCampDto;
+import com.campper.infra.feign.camp.dto.CampDto;
 import com.campper.global.config.FeignConfig;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
         configuration = FeignConfig.class)
 public interface CampInfoClient {
     @GetMapping(value = "/basedList", produces = "application/json", consumes = "application/json")
-    FeignCampDto callOpenApi(
+    CampDto callOpenApi(
             @RequestParam("serviceKey") String serviceKey,
             @RequestParam("numOfRows") Long rows,
             @RequestParam("pageNo") Long pageNo,
