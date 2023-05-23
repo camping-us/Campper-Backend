@@ -50,7 +50,7 @@ public class BoardController {
         return boardService.getBoardById(id);
     }
 
-    @PatchMapping("/{id}")
+    @PutMapping("/{id}")
     @Operation(summary = "게시글 수정", description = "게시글 수정 요청 API 입니다.")
     public GetBoardDetailDto patchBoard(
             @PathVariable Long id,

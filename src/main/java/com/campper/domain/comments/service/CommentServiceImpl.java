@@ -36,7 +36,7 @@ public class CommentServiceImpl implements CommentService{
 
         commentRepository.save(comment);
 
-        return GetCommentDto.fromEntity(comment, user.getNickName());
+        return GetCommentDto.fromEntity(comment, user.getNickName(), user.getId());
     }
 
     @Override
@@ -51,7 +51,7 @@ public class CommentServiceImpl implements CommentService{
         for (Comment comment : commentList) {
             User user = userRepository.findById(comment.getUserId());
             String userName = user.getNickName();
-            comments.add(GetCommentDto.fromEntity(comment, userName));
+            comments.add(GetCommentDto.fromEntity(comment, userName, user.getId()));
         }
         return comments;
     }
@@ -68,7 +68,7 @@ public class CommentServiceImpl implements CommentService{
 
         commentRepository.update(comment);
 
-        return GetCommentDto.fromEntity(comment, user.getNickName());
+        return GetCommentDto.fromEntity(comment, user.getNickName(), user.getId());
     }
 
     @Override
