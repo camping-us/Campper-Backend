@@ -4,6 +4,7 @@ import com.campper.domain.camps.dto.CampDto;
 import com.campper.domain.camps.dto.VoteCampDto;
 import com.campper.domain.camps.entity.Camp;
 import com.campper.domain.camps.entity.VoteCamp;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,9 +13,9 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class GetCampDto {
-    @JsonUnwrapped
+    @JsonProperty(value = "info")
     private CampDto campDto;
-    @JsonUnwrapped
+    @JsonProperty(value = "vote")
     private VoteCampDto voteCampDto;
 
     @Builder
