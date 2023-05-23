@@ -22,6 +22,7 @@ public class BoardLikeServiceImpl implements BoardLikeService{
                 .userId(user.getId())
                 .boardId(id)
                 .build();
+        log.info("boardlike:" + boardLike.getBoardId());
 
         if (boardLikeRepository.existByBoardIdAndUserId(boardLike)) {
             boardLikeRepository.likeCancel(boardLike);
