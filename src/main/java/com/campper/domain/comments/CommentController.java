@@ -25,24 +25,27 @@ public class CommentController {
 
     private final CommentService commentService;
 
-    @PostMapping("/")
+    @PostMapping("")
     @Operation(summary = "댓글 생성", description = "댓글 생성 요청 API 입니다.")
     public GetCommentDto postComment(
             @RequestBody @Valid SaveCommentDto saveCommentDto,
             @AuthenticationPrincipal User user
     ) {
+        log.info("comment info = " + saveCommentDto.getBoardId() + "::" + saveCommentDto.getContent());
+        log.info("user info = " + user.getNickName());
         return commentService.save(saveCommentDto, user);
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     @Operation(summary = "댓글 목록 조회", description = "댓글 목록 조회 API 입니다.")
     public List<GetCommentDto> getBoards(
             CommentParameterDto commentParameterDto
     ) {
+        log.info("AA:" + commentParameterDto.getBoardId());
         return commentService.getCommentList(commentParameterDto);
     }
 
-    @PatchMapping("/")
+    @PutMapping("")
     @Operation(summary = "댓글 수정", description = "댓글 수정 요청 API 입니다.")
     public GetCommentDto patchComment(
             @RequestParam Long commentId,
@@ -52,7 +55,7 @@ public class CommentController {
         return commentService.updateComment(commentId, patchCommentDto, user);
     }
 
-    @DeleteMapping("/")
+    @DeleteMapping("")
     @Operation(summary = "댓글 삭제", description = "게시글 삭제 요청 API 입니다.")
     public void delComment(
             @RequestParam Long commentId,

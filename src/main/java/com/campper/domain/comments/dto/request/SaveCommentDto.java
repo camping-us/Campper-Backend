@@ -1,13 +1,17 @@
 package com.campper.domain.comments.dto.request;
 
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
 
 @Getter
+@Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class SaveCommentDto {
 
     @ApiModelProperty(value = "게시판 번호", example = "7")

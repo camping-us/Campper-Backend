@@ -10,16 +10,17 @@ public class Comment {
     private String content;
     private int isDeleted;
     private int likeCnt;
-    private Long userId;
     private Long boardId;
+    private Long userId;
+
 
     @Builder
-    public Comment(Long id, String content, int isDeleted, int likeCnt, Long userId, Long boardId) {
+    public Comment(Long id, String content, int isDeleted, int likeCnt, Long boardId, Long userId) {
         this.id = id;
         this.content = content;
         this.isDeleted = isDeleted;
         this.likeCnt = likeCnt;
-        this.userId = userId;
         this.boardId = boardId;
+        this.userId = userId;
     }
 }
