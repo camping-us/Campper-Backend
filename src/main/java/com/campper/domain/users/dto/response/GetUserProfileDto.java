@@ -12,8 +12,10 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class GetUserProfileDto {
 
-    @ApiModelProperty(notes = "사용자 아이디", required = true)
+    @ApiModelProperty(notes = "아이디", required = true)
     private Long id;
+    @ApiModelProperty(notes = "사용자 아이디", required = true)
+    private String authKey;
     @ApiModelProperty(notes = "생년월일", required = true)
     private LocalDate birth;
     @ApiModelProperty(notes = "닉네임", required = true)
@@ -24,8 +26,9 @@ public class GetUserProfileDto {
     private String email;
 
     @Builder
-    public GetUserProfileDto(Long id, LocalDate birth, String nickName, String profileImg, String email) {
+    public GetUserProfileDto(Long id, String authKey, LocalDate birth, String nickName, String profileImg, String email) {
         this.id = id;
+        this.authKey = authKey;
         this.birth = birth;
         this.nickName = nickName;
         this.profileImg = profileImg;
@@ -35,6 +38,7 @@ public class GetUserProfileDto {
     public static GetUserProfileDto fromEntity(User user){
         return GetUserProfileDto.builder()
                 .id(user.getId())
+                .authKey(user.getAuthKey())
                 .birth(user.getBirth())
                 .nickName(user.getNickName())
                 .profileImg(user.getProfileImg())
