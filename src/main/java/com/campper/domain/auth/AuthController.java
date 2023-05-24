@@ -33,8 +33,8 @@ public class AuthController {
 
     @PostMapping("/logout")
     @Operation(summary = "로그아웃 요청", description = "로그아웃 요청 API 입니다.")
-    public void logout(@AuthenticationPrincipal User user) {
-        authService.logout(user);
+    public void logout(@RequestBody @Valid PostJwtDto postJwtDto, @AuthenticationPrincipal User user) {
+        authService.logout(postJwtDto, user);
     }
 
     @PostMapping("/reissue")

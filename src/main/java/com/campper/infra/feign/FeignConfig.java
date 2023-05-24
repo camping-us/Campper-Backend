@@ -1,4 +1,4 @@
-package com.campper.global.config;
+package com.campper.infra.feign;
 
 import com.campper.global.common.error.FeignClientExceptionErrorDecoder;
 import feign.Logger;

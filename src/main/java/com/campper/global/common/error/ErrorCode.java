@@ -32,7 +32,7 @@ public enum ErrorCode {
     INVALID_PASSWORD(UNAUTHORIZED, "AUTH011", "비밀번호가 일치하지 않습니다."),
 
     /* User */
-    USER_NOT_FOUND(HttpStatus.BAD_REQUEST, "USER001", "해당 유저가 존재하지 않습니다."),
+    USER_NOT_FOUND(HttpStatus.BAD_REQUEST, "USER001", "가입된 정보가 존재하지 않습니다."),
     DUPLICATE_AUTHKEY(HttpStatus.BAD_REQUEST,"USER002","아이디 중복 입니다."),
 
     /* Admin */
