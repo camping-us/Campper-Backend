@@ -16,6 +16,7 @@
     <select id="listBoard" parameterType="BoardParameterDto" resultType="Board">
         SELECT *
         FROM boards
+        where is_deleted = 0
         order by board_id desc
         limit #{start}, #{spp}
     </select>
