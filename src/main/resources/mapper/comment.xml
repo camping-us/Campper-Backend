@@ -16,7 +16,7 @@
     <select id="listComment" parameterType="CommentParameterDto" resultType="Comment">
         SELECT *
         FROM comments
-        WHERE board_id=#{boardId}
+        WHERE board_id=#{boardId} AND is_deleted = 0
         ORDER BY comment_id desc
         LIMIT #{start}, #{spp}
     </select>
