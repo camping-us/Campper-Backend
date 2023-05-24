@@ -50,7 +50,6 @@ public class UserController {
     @GetMapping("/profile")
     @Operation(summary = "프로필 요청", description = "프로필 요청 API 입니다.")
     public GetUserProfileDto getProfile(@AuthenticationPrincipal User user) {
-        log.info("user: " + user.getId());
         return userService.getUserProfile(user);
     }
 

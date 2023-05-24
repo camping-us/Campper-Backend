@@ -11,7 +11,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,7 +37,7 @@ public class AuthController {
     }
 
     @PostMapping("/reissue")
-    @Operation(summary = "리프레시 토큰 재발행 요청", description = "리프레시 토큰 재발행 요청 API 입니다.")
+    @Operation(summary = "어세스토큰 재발행 요청", description = "어세스토큰 재발행 요청 API 입니다.")
     public GetJwtDto reissue(@RequestBody @Valid PostJwtDto postJwtDto) {
         return authService.reissue(postJwtDto);
     }
