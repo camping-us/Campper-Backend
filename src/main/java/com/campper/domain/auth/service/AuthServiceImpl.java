@@ -7,6 +7,9 @@ import com.campper.domain.auth.dto.response.GetJwtDto;
 import com.campper.domain.auth.jwt.JwtToken;
 import com.campper.domain.auth.jwt.JwtTokenProvider;
 import com.campper.domain.users.entity.User;
+import com.campper.domain.users.repository.UserRepository;
+import com.campper.global.common.error.ErrorCode;
+import com.campper.global.common.error.exception.BadRequestException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,11 +24,16 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public class AuthServiceImpl implements AuthService {
     private final JwtTokenProvider jwtTokenProvider;
+    private final UserRepository userRepository;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
     @Override
     public GetJwtDto login(PostLoginDto postLoginDto) {
         UsernamePasswordAuthenticationToken authentication = postLoginDto.toAuthentication();
+
+        if (!userRepository.existByAuthKey(postLoginDto.getAuthKey())) {
+            throw new BadRequestException(ErrorCode.USER_NOT_FOUND);
+        }
 
         authenticationManagerBuilder.getObject().authenticate(authentication);
 
