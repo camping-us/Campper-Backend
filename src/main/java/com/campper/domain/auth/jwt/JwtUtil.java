@@ -14,6 +14,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
+import java.util.Date;
 
 
 @Slf4j
@@ -26,6 +27,7 @@ public class JwtUtil {
     private String AUTHORITIES_KEY;
 
     private final CustomUserDetailServiceImpl customUserDetailService;
+
     public Key getSecretKey() {
         return Keys.hmacShaKeyFor(secretKey.getBytes());
     }
@@ -43,13 +45,22 @@ public class JwtUtil {
         if (claims.get(AUTHORITIES_KEY) == null) {
             throw new UnauthorizedException(ErrorCode.INVALID_AUTH_TOKEN);
         }
-        ;
-        log.info(claims.getSubject());
+
         /**userDetails 반환*/
-        CustomUserDetails userDetails = (CustomUserDetails)customUserDetailService.loadUserByUsername(claims.getSubject());
+        CustomUserDetails userDetails = (CustomUserDetails) customUserDetailService.loadUserByUsername(claims.getSubject());
 
         return new UsernamePasswordAuthenticationToken(userDetails.getUser(), null,
                 userDetails.getAuthorities());
+    }
+
+    public Long getExpiration(String token) {
+        Date dueTime = Jwts.parserBuilder().setSigningKey(getSecretKey()).build()
+                .parseClaimsJws(token)
+                .getBody().getExpiration();
+
+        Long now = new Date().getTime();
+
+        return dueTime.getTime() - now;
     }
 
     public boolean validateToken(String token) {
