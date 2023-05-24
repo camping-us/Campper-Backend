@@ -3,6 +3,7 @@ package com.campper.domain.boards.repository;
 import com.campper.domain.boards.dto.request.BoardParameterDto;
 import com.campper.domain.boards.dto.response.GetBoardDto;
 import com.campper.domain.boards.entity.Board;
+import com.campper.domain.boards.entity.Category;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -33,4 +34,7 @@ public interface BoardRepository {
 
     // 글 좋아요 수 감소
     void decreaseLikeCnt(Long id);
+
+    // 글 전체 개수 확인
+    int getBoardCntByCategory(Category category);
 }

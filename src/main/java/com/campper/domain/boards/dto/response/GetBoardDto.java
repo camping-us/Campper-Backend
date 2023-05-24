@@ -26,26 +26,16 @@ public class GetBoardDto {
     @NotNull
     private String title;
 
-    @ApiModelProperty(value = "게시글 내용", example = "강아지는 귀여워요")
-    @NotNull
-    private String content;
-
     @ApiModelProperty(value = "게시글 좋아요 수", example = "10")
     @NotNull
     private int likeCnt;
 
-    @ApiModelProperty(value = "작성일", example = "2023-05-23T11:36:58")
-    @NotNull
-    private LocalDateTime createdAt;
-
     @Builder
-    public GetBoardDto(Long id, String userName, String title, String content, int likeCnt, LocalDateTime createdAt) {
+    public GetBoardDto(Long id, String userName, String title, int likeCnt) {
         this.id=id;
         this.userName=userName;
         this.title=title;
-        this.content=content;
         this.likeCnt=likeCnt;
-        this.createdAt=createdAt;
     }
 
     public static GetBoardDto fromEntity(Board board, String userName) {
@@ -53,9 +43,7 @@ public class GetBoardDto {
                 .id(board.getId())
                 .userName(userName)
                 .title(board.getTitle())
-                .content(board.getContent())
                 .likeCnt(board.getLikeCnt())
-                .createdAt(board.getCreatedAt())
                 .build();
     }
 

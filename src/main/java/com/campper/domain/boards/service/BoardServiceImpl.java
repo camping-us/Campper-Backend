@@ -5,6 +5,7 @@ import com.campper.domain.boards.dto.request.PatchBoardDto;
 import com.campper.domain.boards.dto.request.SaveBoardDto;
 import com.campper.domain.boards.dto.response.GetBoardDetailDto;
 import com.campper.domain.boards.dto.response.GetBoardDto;
+import com.campper.domain.boards.dto.response.GetListBoardDto;
 import com.campper.domain.boards.entity.Board;
 import com.campper.domain.boards.entity.Image;
 import com.campper.domain.boards.repository.BoardRepository;
@@ -51,7 +52,7 @@ public class BoardServiceImpl implements BoardService{
     }
 
     @Override
-    public List<GetBoardDto> getBoardList(BoardParameterDto boardParameterDto) {
+    public GetListBoardDto getBoardList(BoardParameterDto boardParameterDto) {
         List<GetBoardDto> boards = new ArrayList<>();
 
         int start = boardParameterDto.getPg() == 0 ? 0 : (boardParameterDto.getPg() - 1) * boardParameterDto.getSpp();
@@ -63,7 +64,13 @@ public class BoardServiceImpl implements BoardService{
             String userName = user.getNickName();
             boards.add(GetBoardDto.fromEntity(board, userName));
         }
-        return boards;
+
+        int totalCnt = boardRepository.getBoardCntByCategory(boardParameterDto.getCategory());
+
+        return GetListBoardDto.builder()
+                .boards(boards)
+                .boardCnt(totalCnt)
+                .build();
     }
 
     @Override

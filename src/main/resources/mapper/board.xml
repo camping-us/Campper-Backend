@@ -16,9 +16,15 @@
     <select id="listBoard" parameterType="BoardParameterDto" resultType="Board">
         SELECT *
         FROM boards
-        where is_deleted = 0
+        where is_deleted = 0 AND category=#{category}
         order by board_id desc
         limit #{start}, #{spp}
+    </select>
+
+    <select id="getBoardCntByCategory" parameterType="Category" resultType="int">
+        SELECT COUNT(*)
+        FROM boards
+        where is_deleted = 0 AND category=#{category}
     </select>
 
     <select id="findByBoardId"
