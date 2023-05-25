@@ -43,14 +43,14 @@ public class CommentController {
         return commentService.getCommentList(boardId, commentParameterDto);
     }
 
-    @PutMapping("")
+    @PutMapping("/{id}")
     @Operation(summary = "댓글 수정", description = "댓글 수정 요청 API 입니다.")
     public GetCommentDto patchComment(
-            @RequestParam Long commentId,
+            @PathVariable Long id,
             @RequestBody @Valid PatchCommentDto patchCommentDto,
             @AuthenticationPrincipal User user
     ) {
-        return commentService.updateComment(commentId, patchCommentDto, user);
+        return commentService.updateComment(id, patchCommentDto, user);
     }
 
     @DeleteMapping("")
