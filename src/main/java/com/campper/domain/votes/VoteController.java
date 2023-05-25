@@ -19,13 +19,13 @@ import org.springframework.web.bind.annotation.*;
 public class VoteController {
     private final VoteService voteService;
 
-    @PostMapping("/")
+    @PostMapping("/{campId}")
     @Operation(summary = "투표 저장 요청", description = "투표 저장 요청 API 입니다.")
-    public void postVote(@RequestParam Long campId, @RequestBody PostVoteDto postVoteDto, @AuthenticationPrincipal User user) {
+    public void postVote(@PathVariable Long campId, @RequestBody PostVoteDto postVoteDto, @AuthenticationPrincipal User user) {
         voteService.saveVote(campId, postVoteDto, user);
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     @Operation(summary = "투표 내역 호출 요청", description = "투표 내역 호출 요청 API 입니다.")
     public GetVoteDto getVote(@RequestParam Long campId, @AuthenticationPrincipal User user) {
         return voteService.getVote(campId, user);
