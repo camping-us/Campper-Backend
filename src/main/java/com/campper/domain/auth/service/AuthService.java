@@ -8,7 +8,7 @@ import com.campper.domain.users.entity.User;
 public interface AuthService {
     GetJwtDto login(PostLoginDto postLoginDto);
 
-    void logout(User user);
+    void logout(PostJwtDto postJwtDto, User user);
 
     GetJwtDto reissue(PostJwtDto postJwtDto);
 }

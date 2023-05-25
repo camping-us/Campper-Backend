@@ -13,12 +13,12 @@
 <!--        private Long facilities;-->
 
 <!--        private Long voteCnt;-->
-<mapper namespace="com.campper.domain.camps.mapper.VoteCampRepository">
+<mapper namespace="com.campper.domain.camps.repository.VoteCampRepository">
     <select id="findByCampId"
             parameterType="Long"
             resultType="VoteCamp">
         SELECT * FROM vote_camps
-        WHERE camp_id=#{camp_id};
+        WHERE camp_id=#{campId};
     </select>
 
     <update id="updateIncrease"

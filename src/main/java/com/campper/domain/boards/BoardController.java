@@ -5,8 +5,11 @@ import com.campper.domain.boards.dto.request.PatchBoardDto;
 import com.campper.domain.boards.dto.request.SaveBoardDto;
 import com.campper.domain.boards.dto.response.GetBoardDetailDto;
 import com.campper.domain.boards.dto.response.GetBoardDto;
+import com.campper.domain.boards.dto.response.GetListBoardDto;
+import com.campper.domain.boards.entity.Category;
 import com.campper.domain.boards.service.BoardService;
 import com.campper.domain.users.entity.User;
+import com.campper.global.common.valid.EnumValid;
 import io.swagger.annotations.Api;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +28,7 @@ import java.util.List;
 public class BoardController {
 
     private final BoardService boardService;
-    @PostMapping("/")
+    @PostMapping("")
     @Operation(summary = "게시글 생성", description = "게시글 생성 요청 API 입니다.")
     public GetBoardDetailDto postBoard(
             @RequestBody @Valid SaveBoardDto saveBoardDto,
@@ -34,9 +37,9 @@ public class BoardController {
         return boardService.save(saveBoardDto, user);
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     @Operation(summary = "게시글 목록 조회", description = "게시글 목록 조회 API 입니다.")
-    public List<GetBoardDto> getBoards(
+    public GetListBoardDto getBoards(
             BoardParameterDto boardParameterDto
     ) {
         return boardService.getBoardList(boardParameterDto);
@@ -50,7 +53,7 @@ public class BoardController {
         return boardService.getBoardById(id);
     }
 
-    @PatchMapping("/{id}")
+    @PutMapping("/{id}")
     @Operation(summary = "게시글 수정", description = "게시글 수정 요청 API 입니다.")
     public GetBoardDetailDto patchBoard(
             @PathVariable Long id,

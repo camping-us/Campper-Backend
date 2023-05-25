@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -25,16 +26,16 @@ public class GetBoardDto {
     @NotNull
     private String title;
 
-    @ApiModelProperty(value = "게시글 내용", example = "강아지는 귀여워요")
+    @ApiModelProperty(value = "게시글 좋아요 수", example = "10")
     @NotNull
-    private String content;
+    private int likeCnt;
 
     @Builder
-    public GetBoardDto(Long id, String userName, String title, String content) {
+    public GetBoardDto(Long id, String userName, String title, int likeCnt) {
         this.id=id;
         this.userName=userName;
         this.title=title;
-        this.content=content;
+        this.likeCnt=likeCnt;
     }
 
     public static GetBoardDto fromEntity(Board board, String userName) {
@@ -42,7 +43,7 @@ public class GetBoardDto {
                 .id(board.getId())
                 .userName(userName)
                 .title(board.getTitle())
-                .content(board.getContent())
+                .likeCnt(board.getLikeCnt())
                 .build();
     }
 

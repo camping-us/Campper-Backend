@@ -29,13 +29,13 @@ public class UserController {
         userService.getAuthKeyDuplicate(authKey);
     }
 
-    @PostMapping("/")
+    @PostMapping("")
     @Operation(summary = "회원가입 요청", description = "회원가입 요청 API 입니다.")
     public void postUser(@RequestBody @Valid PostUserDto postUserDto) {
         userService.join(postUserDto);
     }
 
-    @PutMapping("/")
+    @PutMapping("")
     @Operation(summary = "비밀번호 수정 요청", description = "비밀번호 수정 요청 API 입니다.")
     public void putUser(@RequestBody @Valid PutUserPwdDto putUserPwdDto, @AuthenticationPrincipal User user) {
         userService.updatePwd(putUserPwdDto, user);
@@ -59,7 +59,7 @@ public class UserController {
         userService.checkPwd(pwd, user);
     }
 
-    @DeleteMapping("/")
+    @DeleteMapping("")
     @Operation(summary = "회원 탈퇴 요청", description = "회원 탈퇴 API 입니다.")
     public void delUser(@AuthenticationPrincipal User user) {
         userService.withdraw(user);

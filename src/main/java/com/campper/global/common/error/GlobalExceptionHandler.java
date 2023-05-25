@@ -6,7 +6,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.InternalAuthenticationServiceException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -26,7 +29,8 @@ public class GlobalExceptionHandler {
     /**
      * 로컬 로그인 실패시 발생하는 오류
      * */
-    @ExceptionHandler(BadCredentialsException.class)
+    @ExceptionHandler({BadCredentialsException.class, InternalAuthenticationServiceException.class,
+            UsernameNotFoundException.class, AuthenticationCredentialsNotFoundException.class})
     protected ResponseEntity<ErrorResponse> handleAuthenticationException(Exception ex) {
         log.error("Exception", ex);
         return new ResponseEntity<>(ErrorResponse.onFailure(ErrorCode.LOGIN_FAILED),

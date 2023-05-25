@@ -32,12 +32,12 @@ public class AuthController {
 
     @PostMapping("/logout")
     @Operation(summary = "로그아웃 요청", description = "로그아웃 요청 API 입니다.")
-    public void logout(@AuthenticationPrincipal User user) {
-        authService.logout(user);
+    public void logout(@RequestBody @Valid PostJwtDto postJwtDto, @AuthenticationPrincipal User user) {
+        authService.logout(postJwtDto, user);
     }
 
     @PostMapping("/reissue")
-    @Operation(summary = "리프레시 토큰 재발행 요청", description = "리프레시 토큰 재발행 요청 API 입니다.")
+    @Operation(summary = "어세스토큰 재발행 요청", description = "어세스토큰 재발행 요청 API 입니다.")
     public GetJwtDto reissue(@RequestBody @Valid PostJwtDto postJwtDto) {
         return authService.reissue(postJwtDto);
     }

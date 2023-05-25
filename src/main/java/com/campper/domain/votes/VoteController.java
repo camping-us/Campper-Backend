@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/vote")
+@RequestMapping(value = "/votes")
 @Api(tags = "투표")
 public class VoteController {
     private final VoteService voteService;

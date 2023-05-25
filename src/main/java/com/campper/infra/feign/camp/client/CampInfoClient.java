@@ -1,7 +1,7 @@
 package com.campper.infra.feign.camp.client;
 
 import com.campper.infra.feign.camp.dto.CampDto;
-import com.campper.global.config.FeignConfig;
+import com.campper.infra.feign.FeignConfig;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
