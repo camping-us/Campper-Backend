@@ -38,7 +38,7 @@
 <br/>
 
 ## 💻 Developers
-
+<div align="center">
 <table>
     <tr align="center">
         <td><B>DevOps/Backend</B></td>
@@ -61,3 +61,4 @@
         </td>
     </tr>
 </table>
+</div>
