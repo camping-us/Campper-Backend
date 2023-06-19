@@ -7,10 +7,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
@@ -28,5 +25,14 @@ public class CampDibsController {
             @AuthenticationPrincipal User user
     ) {
         campDibsService.dibs(id, user);
+    }
+
+    @GetMapping("/{id}")
+    @Operation(summary = "캠핑장 찜 여부 확인", description = "캠핑장 찜 여부 요청 API 입니다. 이미 누른 경우에는 true 가 반환됩니다.")
+    public Boolean getIsCampDibs(
+            @PathVariable Long id,
+            @AuthenticationPrincipal User user
+    ) {
+        return campDibsService.checkDibs(id, user);
     }
 }
