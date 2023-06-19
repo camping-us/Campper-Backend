@@ -80,4 +80,4 @@ public class SwaggerConfig {
 
 }
 //swagger: http://localhost:8080/api/swagger-ui/index.html
-//swagger: http://www.campper.site/api/swagger-ui/index.html
+//swagger: http://campper.site/api/swagger-ui/index.html

@@ -26,10 +26,19 @@ public class CampDibsServiceImpl implements CampDibsService {
         if (campDibsRepository.existByCampIdAndUserId(campDibs)) {
             campDibsRepository.dibsCancel(campDibs);
             campRepository.decreaseDibsCnt(id);
-        }
-        else {
+        } else {
             campDibsRepository.dibs(campDibs);
             campRepository.increaseDibsCnt(id);
         }
+    }
+
+    @Override
+    public boolean checkDibs(Long id, User user) {
+        CampDibs campDibs = CampDibs.builder()
+                .userId(user.getId())
+                .campId(id)
+                .build();
+
+        return campDibsRepository.existByCampIdAndUserId(campDibs);
     }
 }

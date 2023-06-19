@@ -43,14 +43,6 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      #Create dotenv file
-      - name: Make env file
-        run: |
-          touch ./.env
-          echo "$ENV_PROPERTIES" > ./.env
-        env:
-          ENV_PROPERTIES: ${{ secrets.ENV_PROPERTIES }}
-
       #Gradle Build
       - name: Build with Gradle
         run: ./gradlew build -x test
