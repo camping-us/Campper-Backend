@@ -99,6 +99,7 @@ public class CampDto {
                 .addr2(camp.getAddr2())
                 .glampInnerFclty(camp.getGlampInnerFclty())
                 .caravInnerFclty(camp.getCaravInnerFclty())
+                .dibCnt(camp.getDibCnt())
                 .build();
     }
 }

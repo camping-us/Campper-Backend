@@ -17,9 +17,9 @@
 
 <br/>
 
-## Skills
+## ⚙️ Skills
 <div align="center"> 
-<img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white"> <img src="https://img.shields.io/badge/spring%20boot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white"> <img src="https://img.shields.io/badge/gradle-02303A?style=for-the-badge&logo=gradle&logoColor=white"> <img src="https://img.shields.io/badge/junit5-25A162?style=for-the-badge&logo=junit5&logoColor=white">
+<img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white"> <img src="https://img.shields.io/badge/spring%20boot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white"> <img src="https://img.shields.io/badge/gradle-02303A?style=for-the-badge&logo=gradle&logoColor=white"> <img src="https://img.shields.io/badge/junit5-25A162?style=for-the-badge&logo=junit5&logoColor=white"> <img src="https://img.shields.io/badge/.ENV-ECD53F?style=for-the-badge&logo=.ENV&logoColor=black">
 <br>
 <img src="https://img.shields.io/badge/mybatis-000000?style=for-the-badge&logo=mybatis&logoColor=white"> <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white">
 <br>
@@ -31,14 +31,14 @@
   
 
 ## 📝 ERD
-![image](https://github.com/camping-us/Campper-Backend/assets/62806067/6a919fda-7630-459f-b6b9-a6ba5916d5ad)
+![image](https://github.com/camping-us/Campper-Backend/assets/62806067/3367a22d-5873-48b7-807a-9ddd457b44b9)
 
 
 
 <br/>
 
 ## 💻 Developers
-
+<div align="center">
 <table>
     <tr align="center">
         <td><B>DevOps/Backend</B></td>
@@ -61,3 +61,4 @@
         </td>
     </tr>
 </table>
+</div>

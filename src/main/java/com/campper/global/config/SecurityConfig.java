@@ -57,9 +57,7 @@ public class SecurityConfig {
         http.headers()
                 .frameOptions().disable();
 
-        http.logout()
-                .invalidateHttpSession(true)
-                .deleteCookies("JSESSIONID");
+        http.logout().disable();
 
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
@@ -74,9 +72,7 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 
-        //로컬 react 개발 환경
         configuration.addAllowedOriginPattern("*");
-        //서버 react 프론트 환경
         configuration.addAllowedHeader("*");
         configuration.addAllowedMethod("*");
         configuration.addExposedHeader("x-auth-token");

@@ -66,6 +66,8 @@ public class AuthServiceImpl implements AuthService {
 
         /**accessToken 블랙리스트 등록*/
         redisUtil.setBlackList("BL:" + postJwtDto.getAccessToken(), "logout", jwtUtil.getExpiration(postJwtDto.getAccessToken()));
+        /**accessToken 블랙리스트 등록*/
+        redisUtil.setBlackList("BL:"+postJwtDto.getRefreshToken(),"logout", jwtUtil.getExpiration(postJwtDto.getRefreshToken()));
 
         SecurityContextHolder.clearContext();
     }
@@ -78,7 +80,7 @@ public class AuthServiceImpl implements AuthService {
         }
 
         /**refreshToken 유효성 확인*/
-        if (!jwtUtil.validateToken(postJwtDto.getRefreshToken())) {
+        if (!jwtUtil.validateToken(postJwtDto.getRefreshToken()) || redisUtil.hasKeyBlackList("BL:"+postJwtDto.getRefreshToken())) {
             throw new UnauthorizedException(ErrorCode.INVALID_TOKEN);
         }
 

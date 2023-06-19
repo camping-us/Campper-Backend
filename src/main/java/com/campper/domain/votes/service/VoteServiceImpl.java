@@ -23,6 +23,7 @@ public class VoteServiceImpl implements VoteService {
     private final VoteCampRepository voteCampRepository;
 
     @Override
+    @Transactional
     public void saveVote(Long campId, PostVoteDto postVoteDto, User user) {
         Vote vote = Vote.builder()
                 .userId(user.getId())
