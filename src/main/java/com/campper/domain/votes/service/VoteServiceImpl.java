@@ -4,6 +4,7 @@ import com.campper.domain.camps.repository.VoteCampRepository;
 import com.campper.domain.users.entity.User;
 import com.campper.domain.votes.dto.VoteInfo;
 import com.campper.domain.votes.dto.request.PostVoteDto;
+import com.campper.domain.votes.dto.request.PutVoteDto;
 import com.campper.domain.votes.dto.response.GetVoteDto;
 import com.campper.domain.votes.entity.Vote;
 import com.campper.domain.votes.repository.VoteRepository;
@@ -40,6 +41,12 @@ public class VoteServiceImpl implements VoteService {
     }
 
     @Override
+    public Boolean checkVote(Long campId, User user) {
+        VoteInfo voteInfo = new VoteInfo(campId, user.getId());
+        return voteRepository.existByCampIdAndUserId(voteInfo);
+    }
+
+    @Override
     public GetVoteDto getVote(Long campId, User user) {
         VoteInfo voteInfo = new VoteInfo(campId, user.getId());
         Vote vote = voteRepository.findByCampIdAndUserId(voteInfo);
@@ -49,13 +56,29 @@ public class VoteServiceImpl implements VoteService {
     }
 
     @Override
+    @Transactional
+    public void updateVote(Long id, PutVoteDto putVoteDto) {
+        Vote vote = Vote.builder()
+                .id(id)
+                .total(putVoteDto.getTotal())
+                .location(putVoteDto.getLocation())
+                .price(putVoteDto.getPrice())
+                .cleanliness(putVoteDto.getCleanliness())
+                .kindness(putVoteDto.getKindness())
+                .facilities(putVoteDto.getFacilities())
+                .build();
+        voteRepository.update(vote);
+    }
+
+    @Override
+    @Transactional
     public void delVote(Long id, User user) {
         Vote vote = voteRepository.findById(id);
         if (vote.getUserId() != user.getId()) {
             throw new UnauthorizedException(ErrorCode.UNAUTHORIZED_ACCESS);
         }
         vote.updateIsDeleted();
-        voteRepository.update(vote);
+        voteRepository.delete(vote);
         voteCampRepository.updateDecrease(vote);
     }
 }

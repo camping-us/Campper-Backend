@@ -23,11 +23,27 @@
     </insert>
 
     <update id="update"
+            parameterType="Vote">
+        UPDATE votes
+        SET total=#{total}, location=#{location}, cleanliness=#{cleanliness}, kindness=#{kindness}, price=#{price}, facilities=#{facilities}
+        WHERE id=#{id} ;
+    </update>
+
+    <update id="delete"
         parameterType="Vote">
         UPDATE votes
         SET is_deleted=#{isDeleted}
         WHERE id=#{id} ;
     </update>
+
+    <select id="existByCampIdAndUserId"
+            parameterType="VoteInfo"
+            resultType="boolean">
+        SELECT EXISTS(
+                       SELECT * FROM votes
+                       WHERE camp_id=#{campId} AND user_id=#{userId}
+                   );
+    </select>
 
     <select id="findByCampIdAndUserId"
             parameterType="VoteInfo"
