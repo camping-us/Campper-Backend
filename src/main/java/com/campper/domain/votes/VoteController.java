@@ -25,6 +25,12 @@ public class VoteController {
         voteService.saveVote(campId, postVoteDto, user);
     }
 
+    @GetMapping("/{campId}")
+    @Operation(summary = "투표 저장 요청", description = "투표 저장 요청 API 입니다.")
+    public Boolean getIsVote(@PathVariable Long campId, @AuthenticationPrincipal User user) {
+        return voteService.checkVote(campId, user);
+    }
+
     @GetMapping("")
     @Operation(summary = "투표 내역 호출 요청", description = "투표 내역 호출 요청 API 입니다.")
     public GetVoteDto getVote(@RequestParam Long campId, @AuthenticationPrincipal User user) {

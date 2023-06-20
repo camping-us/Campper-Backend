@@ -40,6 +40,12 @@ public class VoteServiceImpl implements VoteService {
     }
 
     @Override
+    public Boolean checkVote(Long campId, User user) {
+        VoteInfo voteInfo = new VoteInfo(campId, user.getId());
+        return voteRepository.existByCampIdAndUserId(voteInfo);
+    }
+
+    @Override
     public GetVoteDto getVote(Long campId, User user) {
         VoteInfo voteInfo = new VoteInfo(campId, user.getId());
         Vote vote = voteRepository.findByCampIdAndUserId(voteInfo);

@@ -29,6 +29,15 @@
         WHERE id=#{id} ;
     </update>
 
+    <select id="existByCampIdAndUserId"
+            parameterType="VoteInfo"
+            resultType="boolean">
+        SELECT EXISTS(
+                       SELECT * FROM votes
+                       WHERE camp_id=#{campId} AND user_id=#{userId}
+                   );
+    </select>
+
     <select id="findByCampIdAndUserId"
             parameterType="VoteInfo"
             resultType="Vote">
