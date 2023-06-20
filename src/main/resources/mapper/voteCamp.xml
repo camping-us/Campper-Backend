@@ -34,7 +34,7 @@
         UPDATE vote_camps
         SET total=total-#{total}, location=location-#{location}, cleanliness=cleanliness-#{cleanliness},
             kindness=kindness-#{kindness}, price=price-#{price}, facilities=facilities-#{facilities}, vote_cnt=vote_cnt-1
-        WHERE camp_id=#{id};
+        WHERE camp_id=#{campId};
     </update>
 
     <insert id="saves"

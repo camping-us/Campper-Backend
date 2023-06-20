@@ -57,17 +57,18 @@ public class VoteServiceImpl implements VoteService {
 
     @Override
     @Transactional
-    public void updateVote(Long id, PutVoteDto putVoteDto) {
-        Vote vote = Vote.builder()
-                .id(id)
-                .total(putVoteDto.getTotal())
-                .location(putVoteDto.getLocation())
-                .price(putVoteDto.getPrice())
-                .cleanliness(putVoteDto.getCleanliness())
-                .kindness(putVoteDto.getKindness())
-                .facilities(putVoteDto.getFacilities())
-                .build();
+    public void updateVote(Long id, PutVoteDto putVoteDto, User user) {
+        Vote vote = voteRepository.findById(id);
+        if (vote.getUserId() != user.getId()) {
+            throw new UnauthorizedException(ErrorCode.UNAUTHORIZED_ACCESS);
+        }
+        voteCampRepository.updateDecrease(vote);
+
+        vote.update(putVoteDto.getTotal(), putVoteDto.getLocation(), putVoteDto.getCleanliness(),
+                putVoteDto.getKindness(), putVoteDto.getPrice(), putVoteDto.getFacilities());
+
         voteRepository.update(vote);
+        voteCampRepository.updateIncrease(vote);
     }
 
     @Override

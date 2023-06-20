@@ -41,7 +41,7 @@ public class VoteController {
     @PutMapping("/{id}")
     @Operation(summary = "투표 수정 요청", description = "투표 수정 요청 API 입니다.")
     public void updateVote(@PathVariable("id") Long id, @RequestBody PutVoteDto putVoteDto, @AuthenticationPrincipal User user) {
-        voteService.updateVote(id, putVoteDto);
+        voteService.updateVote(id, putVoteDto, user);
     }
 
     @DeleteMapping("/{id}")
