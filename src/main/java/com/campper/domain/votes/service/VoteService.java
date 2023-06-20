@@ -12,7 +12,7 @@ public interface VoteService {
 
     GetVoteDto getVote(Long campId, User user);
 
-    void updateVote(Long id, PutVoteDto putVoteDto);
+    void updateVote(Long id, PutVoteDto putVoteDto, User user);
 
     void delVote(Long id, User user);
 }
