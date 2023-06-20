@@ -2,6 +2,7 @@ package com.campper.domain.votes;
 
 import com.campper.domain.users.entity.User;
 import com.campper.domain.votes.dto.request.PostVoteDto;
+import com.campper.domain.votes.dto.request.PutVoteDto;
 import com.campper.domain.votes.dto.response.GetVoteDto;
 import com.campper.domain.votes.service.VoteService;
 import io.swagger.annotations.Api;
@@ -25,16 +26,22 @@ public class VoteController {
         voteService.saveVote(campId, postVoteDto, user);
     }
 
-    @GetMapping("/{campId}")
-    @Operation(summary = "투표 저장 요청", description = "투표 저장 요청 API 입니다.")
+    @GetMapping("/check/{campId}")
+    @Operation(summary = "투표 여부 확인 요청", description = "투표 여부 확인 요청 API 입니다.")
     public Boolean getIsVote(@PathVariable Long campId, @AuthenticationPrincipal User user) {
         return voteService.checkVote(campId, user);
     }
 
-    @GetMapping("")
+    @GetMapping("/{campId}")
     @Operation(summary = "투표 내역 호출 요청", description = "투표 내역 호출 요청 API 입니다.")
-    public GetVoteDto getVote(@RequestParam Long campId, @AuthenticationPrincipal User user) {
+    public GetVoteDto getVote(@PathVariable Long campId, @AuthenticationPrincipal User user) {
         return voteService.getVote(campId, user);
+    }
+
+    @PutMapping("/{id}")
+    @Operation(summary = "투표 수정 요청", description = "투표 수정 요청 API 입니다.")
+    public void updateVote(@PathVariable("id") Long id, @RequestBody PutVoteDto putVoteDto, @AuthenticationPrincipal User user) {
+        voteService.updateVote(id, putVoteDto);
     }
 
     @DeleteMapping("/{id}")

@@ -23,6 +23,13 @@
     </insert>
 
     <update id="update"
+            parameterType="Vote">
+        UPDATE votes
+        SET total=#{total}, location=#{location}, cleanliness=#{cleanliness}, kindness=#{kindness}, price=#{price}, facilities=#{facilities}
+        WHERE id=#{id} ;
+    </update>
+
+    <update id="delete"
         parameterType="Vote">
         UPDATE votes
         SET is_deleted=#{isDeleted}

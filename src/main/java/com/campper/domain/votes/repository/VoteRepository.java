@@ -10,6 +10,8 @@ public interface VoteRepository {
 
     void update(Vote vote);
 
+    void delete(Vote vote);
+
     boolean existByCampIdAndUserId(VoteInfo voteInfo);
 
     Vote findByCampIdAndUserId(VoteInfo voteInfo);
