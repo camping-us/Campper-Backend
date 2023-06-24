@@ -29,4 +29,13 @@ public class Vote extends BaseEntity {
         this.price = price;
         this.facilities = facilities;
     }
+
+    public void update(int total, int location, int cleanliness, int kindness, int price, int facilities){
+        this.total = total;
+        this.location = location;
+        this.cleanliness = cleanliness;
+        this.kindness = kindness;
+        this.price = price;
+        this.facilities = facilities;
+    }
 }
